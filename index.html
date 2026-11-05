@@ -888,7 +888,7 @@
     // 구글 시트에서 데이터 불러오기
     async function loadCoursesFromSheet() {
       // 아직 웹앱 URL을 넣지 않은 경우 기본 설정과 8개 과정을 즉시 표시
-      if (!SHEET_API_URL || SHEET_API_URL.includes("https://script.google.com/macros/s/AKfycbzUXWWy-eUvTyqbVgo7nzMq_5WrAp0srbuFnjUazuHwj7iXrAONgGiXCRSzsVOiAni_8A/exec")) {
+      if (!SHEET_API_URL || SHEET_API_URL.includes("https://script.google.com/macros/s/AKfycbxtT6FQPFHJujZ3kOc7OQknXmU_CeJtfFqKwKNy8dm66YG6IfnVRK6DpgVGUUq1C0pbLQ/exec")) {
         applySiteSettings(DEFAULT_SETTINGS, FALLBACK_COURSES);
         renderCourses(FALLBACK_COURSES);
         return;
