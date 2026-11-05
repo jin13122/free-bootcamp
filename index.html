@@ -569,11 +569,11 @@
       </section>
     </div>
 
-    <!-- 맞춤 과정 상담신청 영역 -->
+    <!-- 맞춤 과정 상담신청 영역 (구글 시트 N열 '상담신청링크' 연동) -->
     <div class="scroll-reveal">
       <section class="consult-box">
         <p class="consult-title">어떤 과정을 선택해야 할지 모르겠다면</p>
-        <a href="https://naver.me/FHOGgOaN" target="_blank" rel="noopener noreferrer" class="consult-btn">
+        <a id="consult-link-btn" href="https://naver.me/FHOGgOaN" target="_blank" rel="noopener noreferrer" class="consult-btn">
           나에게 맞는 과정 상담신청하기
         </a>
       </section>
@@ -599,7 +599,8 @@
     <div class="footer-inner">
       <div class="footer-left">
         <p class="footer-brand">국비지원 부트캠프 모아보기</p>
-        <p class="footer-manager">홈페이지담당자: 이종우</p>
+        <!-- 구글 시트 O열 '담당자명' 연동 -->
+        <p class="footer-manager">홈페이지담당자: <span id="footer-manager-name">이종우</span></p>
       </div>
       <div class="footer-right">
         <p>© free-bootcamp. All rights reserved.</p>
@@ -609,7 +610,13 @@
 
   <script>
     // ★ 아래 따옴표 안에 구글 Apps Script 웹 앱 URL을 붙여넣으세요 ★
-    const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxKPpbwJVzgEuMvInNPPH_7RaRLcRgPx1li2vTcKCHHUcv5PRYQsaPxpm5sDJmuIpDdVA/exec";
+    const SHEET_API_URL = "여기에_웹앱_URL을_붙여넣으세요";
+
+    // 시트 연결 전 기본 상담링크 및 담당자명
+    const DEFAULT_SETTINGS = {
+      consultLink: "https://naver.me/FHOGgOaN",
+      managerName: "이종우"
+    };
 
     // 시트 연결 전이거나 오류 발생 시 보여줄 기본 8개 과정 데이터
     const FALLBACK_COURSES = [
@@ -758,7 +765,33 @@
         .replace(/'/g, "&#039;");
     }
 
-    // 개강일 문자열(예: "2026년 11월 09일", "2026-11-9")에서 비교용 숫자(20261109) 추출
+    // 상담신청 링크 및 담당자명 업데이트 함수
+    function applySiteSettings(settings, courses) {
+      let consultLink = settings && settings.consultLink ? settings.consultLink : "";
+      let managerName = settings && settings.managerName ? settings.managerName : "";
+
+      // 혹시 이전 버전의 Apps Script를 사용 중이어서 배열 안에 값이 들어있는 경우까지 호환 처리
+      if (!consultLink && Array.isArray(courses)) {
+        const foundLinkRow = courses.find(c => c["상담신청링크"] && String(c["상담신청링크"]).trim() !== "");
+        if (foundLinkRow) consultLink = String(foundLinkRow["상담신청링크"]).trim();
+      }
+      if (!managerName && Array.isArray(courses)) {
+        const foundManagerRow = courses.find(c => c["담당자명"] && String(c["담당자명"]).trim() !== "");
+        if (foundManagerRow) managerName = String(foundManagerRow["담당자명"]).trim();
+      }
+
+      const consultBtn = document.getElementById("consult-link-btn");
+      if (consultBtn) {
+        consultBtn.href = consultLink || DEFAULT_SETTINGS.consultLink;
+      }
+
+      const managerSpan = document.getElementById("footer-manager-name");
+      if (managerSpan) {
+        managerSpan.textContent = managerName || DEFAULT_SETTINGS.managerName;
+      }
+    }
+
+    // 개강일 문자열에서 비교용 숫자(20261109) 추출
     function parseStartDateValue(dateStr) {
       if (!dateStr) return 99999999;
       const match = String(dateStr).match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/);
@@ -768,7 +801,7 @@
         const day = match[3].padStart(2, "0");
         return parseInt(`${year}${month}${day}`, 10);
       }
-      return 99999999; // 날짜 형식이 아닌 경우 맨 아래로 배치
+      return 99999999;
     }
 
     // 개강일 빠른순으로 정렬하는 함수 (날짜가 같으면 시트에 적힌 원래 순서 유지)
@@ -854,8 +887,10 @@
 
     // 구글 시트에서 데이터 불러오기
     async function loadCoursesFromSheet() {
-      // 아직 웹앱 URL을 넣지 않은 경우 기본 8개 과정을 즉시 표시
-      if (!SHEET_API_URL || SHEET_API_URL.includes("여기에_웹앱_URL")) {
+      // 아직 웹앱 URL을 넣지 않은 경우 기본 설정과 8개 과정을 즉시 표시
+      if (!SHEET_API_URL || SHEET_API_URL.includes("https://script.google.com/macros/s/AKfycbxKPpbwJVzgEuMvInNPPH_7RaRLcRgPx1li2vTcKCHHUcv5PRYQsaPxpm5sDJmuIpDdVA/exec
+")) {
+        applySiteSettings(DEFAULT_SETTINGS, FALLBACK_COURSES);
         renderCourses(FALLBACK_COURSES);
         return;
       }
@@ -864,9 +899,16 @@
         const response = await fetch(SHEET_API_URL);
         if (!response.ok) throw new Error("네트워크 응답 오류");
         const data = await response.json();
-        renderCourses(data);
+
+        // 새 Apps Script 응답 구조 ({ settings, courses }) 및 이전 배열 구조 모두 호환
+        const courses = Array.isArray(data) ? data : (data.courses || []);
+        const settings = Array.isArray(data) ? {} : (data.settings || {});
+
+        applySiteSettings(settings, courses);
+        renderCourses(courses);
       } catch (error) {
         console.error("구글 시트 연동 실패, 기본 데이터를 표시합니다:", error);
+        applySiteSettings(DEFAULT_SETTINGS, FALLBACK_COURSES);
         renderCourses(FALLBACK_COURSES);
       }
     }
