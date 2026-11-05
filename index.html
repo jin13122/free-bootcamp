@@ -420,6 +420,7 @@
       background-color: var(--accent-hover);
     }
 
+    /* 하단 푸터 */
     footer {
       position: relative;
       z-index: 10;
@@ -433,14 +434,32 @@
       margin: 0 auto;
       padding: 32px 24px;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
       font-size: 12px;
+      color: #94A3B8;
+    }
+
+    .footer-left {
+      text-align: left;
     }
 
     .footer-brand {
-      font-weight: 600;
-      color: #CBD5E1;
+      font-size: 14px;
+      font-weight: 700;
+      color: #E2E8F0;
+      margin-bottom: 4px;
+    }
+
+    .footer-manager {
+      color: #94A3B8;
+    }
+
+    .footer-right {
+      text-align: right;
+      color: #94A3B8;
     }
 
     @media (max-width: 640px) {
@@ -454,6 +473,13 @@
       }
       .course-footer {
         grid-template-columns: 1fr;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-right {
+        text-align: left;
       }
     }
   </style>
@@ -555,7 +581,57 @@
 
     <!-- 과정 카드 리스트 (1줄에 1개씩, 개강일 빠른순) -->
     <div class="course-list">
-      <!-- 과정 1: 메가존클라우드 x SeSAC (2026년 12월 07일 개강) -->
+      <!-- 과정 1: 한국정보교육원 (2026년 11월 09일 개강) -->
+      <div class="scroll-reveal">
+        <article class="course-card">
+          <div class="course-meta num">
+            <span class="start-badge">2026년 11월 09일 개강</span>
+            <span>K-디지털트레이닝 · 오프라인 대면수업</span>
+          </div>
+          <h3 class="course-title">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</h3>
+          <dl class="spec-list">
+            <div class="spec-row"><dt>교육기관:</dt><dd class="strong-white">한국정보교육원</dd></div>
+            <div class="spec-row"><dt>과정명:</dt><dd>현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</dd></div>
+            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 11월 09일</dd></div>
+            <div class="spec-row"><dt>교육장소:</dt><dd>서울 신림(당곡역)</dd></div>
+            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용:</dt><dd class="num">9,493,000원</dd></div>
+            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">400,000원</dd></div>
+          </dl>
+          <div class="course-footer">
+            <a href="https://k-edu-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
+            <a href="https://naver.me/5imEQFuO" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- 과정 2: kt cloud (2026년 11월 11일 개강) -->
+      <div class="scroll-reveal">
+        <article class="course-card">
+          <div class="course-meta num">
+            <span class="start-badge">2026년 11월 11일 개강</span>
+            <span>AI캠퍼스 · 오프라인 대면수업</span>
+          </div>
+          <h3 class="course-title">AI 데이터센터 인프라 엔지니어 양성과정(1기수)</h3>
+          <dl class="spec-list">
+            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">kt cloud</dd></div>
+            <div class="spec-row"><dt>과정명:</dt><dd>AI 데이터센터 인프라 엔지니어 양성과정(1기수)</dd></div>
+            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 11월 11일</dd></div>
+            <div class="spec-row"><dt>교육장소:</dt><dd>서울 강남(강남역)</dd></div>
+            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형:</dt><dd>AI캠퍼스</dd></div>
+            <div class="spec-row"><dt>교육비용:</dt><dd class="num">17,424,000원</dd></div>
+            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">0원(전액무료)</dd></div>
+          </dl>
+          <div class="course-footer">
+            <a href="https://ktcloud-aicampus.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
+            <a href="https://naver.me/xaT1r6l5" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- 과정 3: 메가존클라우드 x SeSAC (2026년 12월 07일 개강) -->
       <div class="scroll-reveal">
         <article class="course-card">
           <div class="course-meta num">
@@ -580,7 +656,7 @@
         </article>
       </div>
 
-      <!-- 과정 2: SM UNIVERSE (2026년 12월 10일 개강) -->
+      <!-- 과정 4: SM UNIVERSE (2026년 12월 10일 개강) -->
       <div class="scroll-reveal">
         <article class="course-card">
           <div class="course-meta num">
@@ -605,7 +681,7 @@
         </article>
       </div>
 
-      <!-- 과정 3: 한국정보교육원 (2026년 12월 21일 개강) -->
+      <!-- 과정 5: 한국정보교육원 (2026년 12월 21일 개강) -->
       <div class="scroll-reveal">
         <article class="course-card">
           <div class="course-meta num">
@@ -630,17 +706,42 @@
         </article>
       </div>
 
-      <!-- 과정 4: kt cloud (2026년 12월 29일 개강) -->
+      <!-- 과정 6: 한국직업능력교육원 안산캠퍼스 (2026년 12월 21일 개강) -->
+      <div class="scroll-reveal">
+        <article class="course-card">
+          <div class="course-meta num">
+            <span class="start-badge">2026년 12월 21일 개강</span>
+            <span>원룸형기숙사 · K-디지털트레이닝 · 오프라인 대면수업</span>
+          </div>
+          <h3 class="course-title">AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</h3>
+          <dl class="spec-list">
+            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">한국직업능력교육원 안산캠퍼스</dd></div>
+            <div class="spec-row"><dt>과정명:</dt><dd>AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</dd></div>
+            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 21일</dd></div>
+            <div class="spec-row"><dt>교육장소:</dt><dd>경기도 안산시(4호선 중앙역)</dd></div>
+            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업(기숙사제공)</dd></div>
+            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용:</dt><dd class="num">9,151,250원</dd></div>
+            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">400,000원</dd></div>
+          </dl>
+          <div class="course-footer">
+            <a href="https://ai-iot-embedded-jh.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
+            <a href="https://naver.me/Fuzw9Srr" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- 과정 7: kt cloud (2026년 12월 29일 개강) -->
       <div class="scroll-reveal">
         <article class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 12월 29일 개강</span>
             <span>AI캠퍼스 · 오프라인 대면수업</span>
           </div>
-          <h3 class="course-title">AI 데이터센터 인프라 엔지니어 양성과정</h3>
+          <h3 class="course-title">AI 데이터센터 인프라 엔지니어 양성과정(2기수)</h3>
           <dl class="spec-list">
             <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">kt cloud</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>AI 데이터센터 인프라 엔지니어 양성과정</dd></div>
+            <div class="spec-row"><dt>과정명:</dt><dd>AI 데이터센터 인프라 엔지니어 양성과정(2기수)</dd></div>
             <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 29일</dd></div>
             <div class="spec-row"><dt>교육장소:</dt><dd>서울 강남(강남역)</dd></div>
             <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
@@ -655,7 +756,7 @@
         </article>
       </div>
 
-      <!-- 과정 5: kt cloud (2027년 01월 12일 개강) -->
+      <!-- 과정 8: kt cloud (2027년 01월 12일 개강) -->
       <div class="scroll-reveal">
         <article class="course-card">
           <div class="course-meta num">
@@ -684,7 +785,13 @@
 
   <footer>
     <div class="footer-inner">
-      <p class="footer-brand">국비지원 부트캠프 모아보기</p>
+      <div class="footer-left">
+        <p class="footer-brand">국비지원 부트캠프 모아보기</p>
+        <p class="footer-manager">홈페이지담당자: 이준우</p>
+      </div>
+      <div class="footer-right">
+        <p>© free-bootcamp. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
