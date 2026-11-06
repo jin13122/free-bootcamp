@@ -1,0 +1,23 @@
+{
+  "name": "free-bootcamp",
+  "version": "1.0.0",
+  "description": "국비지원 부트캠프 모아보기 - Korean government-funded bootcamp directory",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jin13122/free-bootcamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jin13122/free-bootcamp/issues"
+  },
+  "homepage": "https://github.com/jin13122/free-bootcamp#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
