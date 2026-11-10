@@ -28,21 +28,28 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07090E;
-      --surface: #0D121C;
-      --text: #F8FAFC;
-      --text-secondary: #CBD5E1;
-      --text-muted: #94A3B8;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(59, 130, 246, 0.5);
-      --accent: #2563EB;
-      --accent-hover: #1D4ED8;
-      --accent-light: #60A5FA;
-      --sky: #38BDF8;
-      --sky-hover: #0EA5E9;
+      --bg: #F5F4F0;
+      --surface: #FFFFFF;
+      --surface-elevated: #F9F8F5;
+      --surface-subtle: #EFECE6;
+      --text: #141413;
+      --text-secondary: #3F3F46;
+      --text-muted: #71717A;
+      --border: #E4E2DD;
+      --border-hover: #4F46E5;
+      --accent: #4F46E5;
+      --accent-hover: #4338CA;
+      --accent-light: #6366F1;
+      --accent-soft: #EEF2FF;
+      --coral: #EA580C;
+      --coral-hover: #C2410C;
+      --emerald: #059669;
+      --amber: #D97706;
+      --rose: #E11D48;
+      --violet: #7C3AED;
     }
 
     * {
@@ -60,9 +67,10 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.65;
-      letter-spacing: 0.01em;
+      letter-spacing: -0.01em;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      padding-bottom: 92px;
     }
 
     .num {
@@ -70,88 +78,151 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* 배경 은은한 광원 효과 */
+    /* 배경 은은한 도트 패턴 & 파스텔 광원 효과 */
     .ambient-glow {
       pointer-events: none;
       position: fixed;
       inset: 0;
       z-index: 0;
       overflow: hidden;
+      background-image: radial-gradient(rgba(20, 20, 19, 0.055) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
 
     .ambient-glow::before {
       content: "";
       position: absolute;
-      top: -180px;
+      top: -160px;
       left: 50%;
       transform: translateX(-50%);
-      width: 960px;
-      height: 460px;
+      width: 920px;
+      height: 420px;
       border-radius: 9999px;
-      background: rgba(29, 78, 216, 0.15);
-      filter: blur(130px);
+      background: radial-gradient(circle, rgba(79, 70, 229, 0.10) 0%, rgba(234, 88, 12, 0.05) 60%, transparent 100%);
+      filter: blur(90px);
     }
 
     .ambient-glow::after {
       content: "";
       position: absolute;
-      top: 45%;
-      right: -160px;
+      top: 40%;
+      right: -180px;
       width: 520px;
       height: 520px;
       border-radius: 9999px;
-      background: rgba(30, 58, 138, 0.12);
-      filter: blur(140px);
+      background: rgba(5, 150, 105, 0.07);
+      filter: blur(110px);
     }
 
-    /* 상단 헤더 */
+    /* 상단 헤더 & 네비게이션 바 */
     header {
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(7, 9, 14, 0.85);
+      background: rgba(245, 244, 240, 0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
-      max-width: 896px;
+      max-width: 920px;
       margin: 0 auto;
-      padding: 16px 24px;
+      padding: 12px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header-top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
 
     .brand-title {
       font-size: 18px;
-      font-weight: 700;
-      color: #FFFFFF;
+      font-weight: 900;
+      color: var(--text);
       text-decoration: none;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       transition: color 0.15s ease;
     }
 
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+    }
+
     .brand-title:hover {
-      color: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 2px;
+    }
+
+    .top-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .top-nav-btn {
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.16s ease;
+    }
+
+    .top-nav-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .top-nav-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(79, 70, 229, 0.25);
     }
 
     /* 메인 레이아웃 */
     main {
       position: relative;
       z-index: 10;
-      max-width: 896px;
+      max-width: 920px;
       margin: 0 auto;
-      padding: 56px 24px 64px;
+      padding: 40px 24px 64px;
     }
 
-    /* 스크롤 올리고 내릴 때마다 나타났다가 사라지는 애니메이션 */
+    /* 스크롤 애니메이션 */
     .scroll-reveal {
       opacity: 0;
-      transform: translateY(36px) scale(0.985);
+      transform: translateY(32px) scale(0.99);
       transition:
-        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
 
@@ -160,13 +231,65 @@
       transform: translateY(0) scale(1);
     }
 
+    /* D-Day 배지 공통 스타일 */
+    .dday-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .dday-badge.urgent {
+      background: #FFF1F2;
+      color: var(--rose);
+      border: 1px solid #FECDD3;
+      animation: pulseGlow 2s infinite;
+    }
+
+    .dday-badge.soon {
+      background: #FEF3C7;
+      color: #B45309;
+      border: 1px solid #FDE68A;
+    }
+
+    .dday-badge.open {
+      background: #ECFDF5;
+      color: var(--emerald);
+      border: 1px solid #A7F3D0;
+    }
+
+    /* 개강일 경과 시 '추가모집중' 전용 스타일 */
+    .dday-badge.extra {
+      background: #F3E8FF;
+      color: var(--violet);
+      border: 1px solid #DDD6FE;
+      animation: pulseExtra 2.2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.25); }
+      50% { box-shadow: 0 0 0 5px rgba(225, 29, 72, 0); }
+    }
+
+    @keyframes pulseExtra {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.22); }
+      50% { box-shadow: 0 0 0 5px rgba(124, 58, 237, 0); }
+    }
+
     /* 소개 및 고민 섹션 카드 */
     .editorial-box {
-      background: rgba(13, 18, 28, 0.9);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 22px;
       padding: 48px;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
+      box-shadow: 0 12px 32px -12px rgba(20, 20, 19, 0.05);
     }
 
     .editorial-box.center-box {
@@ -176,43 +299,43 @@
     .title-block {
       width: 100%;
       text-align: center;
-      padding-bottom: 28px;
+      padding-bottom: 26px;
       margin-bottom: 32px;
       border-bottom: 1px solid var(--border);
     }
 
     .section-main-title {
-      font-size: clamp(1.85rem, 3.8vw, 2.75rem);
+      font-size: clamp(1.8rem, 3.6vw, 2.55rem);
       font-weight: 900;
-      line-height: 1.3;
-      letter-spacing: -0.02em;
-      color: #FFFFFF;
+      line-height: 1.32;
+      letter-spacing: -0.025em;
+      color: var(--text);
       text-align: center;
     }
 
     .accent-underline {
-      color: var(--accent-light);
-      text-decoration: underline;
-      text-decoration-color: rgba(59, 130, 246, 0.6);
-      text-decoration-thickness: 4px;
-      text-underline-offset: 8px;
+      color: var(--accent);
+      background: linear-gradient(180deg, transparent 62%, rgba(79, 70, 229, 0.16) 62%);
+      padding: 0 4px;
+      text-decoration: none;
     }
 
     .accent-bar {
-      width: 112px;
-      height: 6px;
-      background: linear-gradient(90deg, #2563EB, #60A5FA, #2563EB);
+      width: 64px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--coral));
       border-radius: 9999px;
-      margin: 24px auto 0;
+      margin: 20px auto 0;
     }
 
     /* 상단 진행중인 부트캠프 요약 슬라이드 영역 */
     .ongoing-section {
-      background: rgba(13, 18, 28, 0.9);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 22px;
       padding: 40px 36px 36px;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
+      box-shadow: 0 12px 32px -12px rgba(20, 20, 19, 0.06);
     }
 
     .ongoing-header {
@@ -232,7 +355,8 @@
     }
 
     .ongoing-guide-text {
-      font-size: 13px;
+      font-size: 13.5px;
+      font-weight: 600;
       color: var(--text-muted);
     }
 
@@ -243,33 +367,33 @@
     }
 
     .ongoing-nav-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       border: 1px solid var(--border);
-      background: var(--surface);
+      background: var(--surface-elevated);
       color: var(--text);
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 700;
       line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .ongoing-nav-btn:hover:not(:disabled) {
-      border-color: var(--border-hover);
-      background: rgba(37, 99, 235, 0.18);
-      color: var(--accent-light);
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #FFFFFF;
     }
 
     .ongoing-slider-viewport {
       overflow: hidden;
       width: 100%;
       position: relative;
-      padding: 4px 0 8px;
+      padding: 6px 0 10px;
       touch-action: pan-y;
       user-select: none;
       -webkit-user-select: none;
@@ -284,43 +408,56 @@
     }
 
     .ongoing-card {
-      background: var(--surface);
+      background: var(--surface-elevated);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 20px;
-      min-height: 196px;
+      border-top: 3px solid var(--accent);
+      border-radius: 16px;
+      padding: 20px;
+      min-height: 210px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       text-decoration: none;
       color: inherit;
       cursor: pointer;
-      transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .ongoing-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      background: rgba(18, 25, 40, 0.95);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      background: #FFFFFF;
+      box-shadow: 0 14px 28px -10px rgba(79, 70, 229, 0.15);
     }
 
     .ongoing-card-top {
+      margin-bottom: 14px;
+    }
+
+    .ongoing-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
       margin-bottom: 12px;
+      flex-wrap: wrap;
     }
 
     .ongoing-date {
       display: inline-block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      color: var(--accent-light);
-      margin-bottom: 10px;
+      color: var(--text-secondary);
+      background: var(--surface-subtle);
+      padding: 3px 8px;
+      border-radius: 6px;
     }
 
     .ongoing-subject {
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 15.5px;
+      font-weight: 800;
       line-height: 1.45;
-      color: #FFFFFF;
+      color: var(--text);
       word-break: keep-all;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -329,9 +466,9 @@
     }
 
     .ongoing-location {
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+      font-size: 12.5px;
       color: var(--text-secondary);
       display: flex;
       align-items: center;
@@ -347,15 +484,19 @@
     }
 
     .ongoing-location-value {
-      color: #E2E8F0;
-      font-weight: 600;
+      color: var(--text);
+      font-weight: 700;
       text-align: right;
     }
 
     .intro-highlight {
-      font-size: 20px;
-      font-weight: 700;
-      color: #93C5FD;
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 8px 20px;
+      border-radius: 999px;
       margin-bottom: 24px;
       text-align: center;
     }
@@ -373,206 +514,416 @@
     }
 
     .intro-paragraphs p:last-child {
-      color: #FFFFFF;
-      font-weight: 600;
-      padding-top: 4px;
+      color: var(--text);
+      font-weight: 800;
+      padding-top: 6px;
       margin-bottom: 0;
+    }
+
+    /* 인터랙티브 고민 리스트 */
+    .concern-guide {
+      text-align: center;
+      font-size: 13.5px;
+      color: var(--accent);
+      margin-top: -14px;
+      margin-bottom: 24px;
+      font-weight: 700;
     }
 
     .concern-list {
       list-style: none;
-      border-bottom: 1px solid var(--border);
       margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .concern-list li {
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-elevated);
       display: flex;
-      align-items: baseline;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
-      font-size: 16px;
-      color: #E2E8F0;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .concern-list li:last-child {
-      border-bottom: none;
+    .concern-list li:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: translateX(4px);
+    }
+
+    .concern-item-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
     .concern-num {
       font-size: 12px;
-      font-weight: 600;
-      color: var(--accent-light);
+      font-weight: 800;
+      color: #FFFFFF;
+      background: var(--text);
+      padding: 3px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .concern-list li:hover .concern-num {
+      background: var(--accent);
+    }
+
+    .concern-action-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      background: #FFFFFF;
+      border: 1px solid rgba(79, 70, 229, 0.25);
+      padding: 5px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
       flex-shrink: 0;
     }
 
     .concern-closing {
-      font-size: 18px;
-      font-weight: 700;
-      color: #FFFFFF;
+      font-size: 17.5px;
+      font-weight: 800;
+      color: var(--text);
       text-align: center;
     }
 
     /* 상담신청 섹션 */
     .consult-box {
-      background: linear-gradient(180deg, #0F172A 0%, #0D121C 100%);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      border-radius: 16px;
-      padding: 40px 32px;
+      background: linear-gradient(135deg, #1E1B4B 0%, #4338CA 100%);
+      border-radius: 22px;
+      padding: 44px 32px;
       text-align: center;
-      margin-bottom: 72px;
+      margin-bottom: 68px;
+      box-shadow: 0 20px 40px -15px rgba(67, 56, 202, 0.35);
     }
 
     .consult-title {
-      font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
       font-weight: 800;
       color: #FFFFFF;
       margin-bottom: 24px;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
     }
 
     .consult-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 16px 32px;
-      background-color: var(--sky);
-      color: #07090E;
+      padding: 16px 34px;
+      background-color: #FFFFFF;
+      color: #1E1B4B;
       font-size: 16px;
-      font-weight: 800;
-      border-radius: 12px;
+      font-weight: 900;
+      border-radius: 14px;
       text-decoration: none;
-      transition: background-color 0.15s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.18s ease;
     }
 
     .consult-btn:hover {
-      background-color: var(--sky-hover);
+      background-color: #FDE047;
+      color: #141413;
+      transform: translateY(-2px);
     }
 
-    /* 과정 목록 타이틀 (제목만 중앙정렬 & 강조) */
+    /* 과정 목록 타이틀 및 조건별 필터 바 */
     #courses-list-section {
-      scroll-margin-top: 96px;
+      scroll-margin-top: 148px;
     }
 
     .list-heading {
       width: 100%;
       text-align: center;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 28px;
-      margin-bottom: 40px;
+      padding-bottom: 26px;
+      margin-bottom: 26px;
     }
 
-    /* 과정 카드 (한 줄에 1개씩) */
+    .filter-bar-wrap {
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .filter-tab-btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(20, 20, 19, 0.03);
+    }
+
+    .filter-tab-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .filter-tab-btn.active {
+      background: var(--text);
+      border-color: var(--text);
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(20, 20, 19, 0.18);
+    }
+
+    .filter-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 0 6px;
+    }
+
+    .filter-count-highlight {
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    /* 과정 카드 리스트 */
     .course-list {
       display: grid;
       grid-template-columns: 1fr;
       gap: 28px;
     }
 
+    .course-card-wrapper.is-hidden {
+      display: none !important;
+    }
+
     .course-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 22px;
       padding: 36px;
-      scroll-margin-top: 96px;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      scroll-margin-top: 148px;
+      box-shadow: 0 10px 30px -12px rgba(20, 20, 19, 0.06);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+      position: relative;
     }
 
     .course-card:hover {
-      border-color: var(--border-hover);
+      border-color: #CBD5E1;
+      box-shadow: 0 18px 38px -12px rgba(20, 20, 19, 0.10);
     }
 
     .course-card.is-highlighted {
-      border-color: var(--sky);
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25), 0 20px 40px -10px rgba(79, 70, 229, 0.2);
     }
 
+    /* 카드 상단 메타 및 혜택 태그 */
     .course-meta {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      font-size: 12px;
+      gap: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .course-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .course-meta .start-badge {
-      color: var(--accent-light);
-      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 12.5px;
+    }
+
+    .benefit-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .benefit-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .benefit-tag.tag-free {
+      background: #ECFDF5;
+      color: #047857;
+      border: 1px solid #A7F3D0;
+    }
+
+    .benefit-tag.tag-nocard {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+    }
+
+    .benefit-tag.tag-dorm {
+      background: #FAF5FF;
+      color: #6D28D9;
+      border: 1px solid #E9D5FF;
+    }
+
+    .benefit-tag.tag-online {
+      background: #FFFBEB;
+      color: #B45309;
+      border: 1px solid #FDE68A;
+    }
+
+    .benefit-tag.tag-kdt {
+      background: var(--surface-subtle);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
     }
 
     .course-title {
       font-size: 22px;
-      font-weight: 700;
+      font-weight: 900;
       line-height: 1.4;
-      color: #FFFFFF;
+      color: var(--text);
       padding-bottom: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       border-bottom: 1px solid var(--border);
       word-break: keep-all;
     }
 
+    /* 한눈에 들어오는 2열 요약 스펙 그리드 */
     .spec-list {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .spec-row {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      align-items: baseline;
-      font-size: 15px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14.5px;
+    }
+
+    .spec-row.spec-full {
+      grid-column: 1 / -1;
+      background: #F4F3FF;
+      border-color: #E0E7FF;
     }
 
     .spec-row dt {
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+      font-size: 13.5px;
+    }
+
+    .spec-icon {
+      width: 15px;
+      height: 15px;
+      color: var(--accent);
+      flex-shrink: 0;
     }
 
     .spec-row dd {
-      color: #E2E8F0;
+      color: var(--text-secondary);
       word-break: keep-all;
+      text-align: right;
+      font-weight: 600;
     }
 
     .spec-row dd.strong-white {
-      font-weight: 700;
-      color: #FFFFFF;
+      font-weight: 800;
+      color: var(--text);
     }
 
     .spec-row dd.strong-accent {
-      font-weight: 700;
-      color: var(--accent-light);
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .spec-row dd.strong-free {
+      font-weight: 900;
+      color: var(--emerald);
     }
 
     .course-footer {
       padding-top: 20px;
       border-top: 1px solid var(--border);
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr auto;
       gap: 12px;
     }
 
-    /* 홈페이지(상세내용) 버튼 - 하늘색 */
+    /* 홈페이지(상세내용) 버튼 */
     .detail-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
       padding: 14px 20px;
-      background-color: var(--sky);
-      color: #07090E;
+      background-color: var(--surface-elevated);
+      border: 1px solid #D4D4D8;
+      color: var(--text);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       border-radius: 12px;
       text-decoration: none;
-      transition: background-color 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .detail-btn:hover {
-      background-color: var(--sky-hover);
+      background-color: var(--surface-subtle);
+      border-color: var(--text);
+      transform: translateY(-1px);
     }
 
     /* 지원접수 버튼 */
@@ -580,18 +931,46 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
       padding: 14px 20px;
       background-color: var(--accent);
       color: #FFFFFF;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 800;
       border-radius: 12px;
       text-decoration: none;
-      transition: background-color 0.15s ease;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+      transition: all 0.15s ease;
     }
 
     .apply-btn:hover {
       background-color: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* 과정 링크 공유(복사) 버튼 */
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 16px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .share-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background-color: var(--accent-soft);
     }
 
     .status-message {
@@ -599,31 +978,133 @@
       padding: 48px 24px;
       color: var(--text-secondary);
       font-size: 16px;
+      font-weight: 600;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
+    }
+
+    /* 하단 고정 플로팅 상담 바 */
+    .floating-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      width: calc(100% - 32px);
+      max-width: 560px;
+      background: rgba(20, 20, 19, 0.94);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 8px 10px 8px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 18px 38px rgba(20, 20, 19, 0.28);
+    }
+
+    .floating-bar-text {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .floating-bar-text span {
+      color: #A5B4FC;
+    }
+
+    .floating-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .floating-consult-btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #6366F1, #4F46E5);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .floating-consult-btn:hover {
+      opacity: 0.95;
+      transform: scale(1.02);
+    }
+
+    .floating-top-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.15s ease;
+    }
+
+    .floating-top-btn:hover {
+      background: #FFFFFF;
+      color: var(--text);
+    }
+
+    /* 링크 복사 완료 토스트 알림 */
+    .copy-toast {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--text);
+      color: #FFFFFF;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 11px 22px;
+      border-radius: 999px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 50;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     /* 하단 푸터 */
     footer {
       position: relative;
       z-index: 10;
-      background: #05070B;
+      background: #EAE8E1;
       border-top: 1px solid var(--border);
       margin-top: 64px;
     }
 
     .footer-inner {
-      max-width: 896px;
+      max-width: 920px;
       margin: 0 auto;
-      padding: 32px 24px;
+      padding: 36px 24px;
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
-      font-size: 12px;
-      color: #94A3B8;
+      font-size: 12.5px;
+      color: var(--text-muted);
     }
 
     .footer-left {
@@ -631,28 +1112,41 @@
     }
 
     .footer-brand {
-      font-size: 14px;
-      font-weight: 700;
-      color: #E2E8F0;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text);
       margin-bottom: 4px;
     }
 
     .footer-manager {
-      color: #94A3B8;
+      color: var(--text-secondary);
+      font-weight: 600;
     }
 
     .footer-right {
       text-align: right;
-      color: #94A3B8;
+      color: var(--text-muted);
     }
 
     @media (max-width: 768px) {
       .ongoing-slider-track {
         grid-auto-columns: calc((100% - 16px) / 2);
       }
+      .spec-list {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
+      .header-inner {
+        padding: 10px 16px;
+      }
+      .top-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
       .editorial-box,
       .ongoing-section,
       .course-card,
@@ -663,10 +1157,18 @@
         grid-auto-columns: 100%;
       }
       .course-title {
-        font-size: 18px;
+        font-size: 18.5px;
       }
       .course-footer {
         grid-template-columns: 1fr;
+      }
+      .concern-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .concern-action-tag {
+        align-self: flex-end;
       }
       .footer-inner {
         flex-direction: column;
@@ -675,6 +1177,12 @@
       .footer-right {
         text-align: left;
       }
+      .floating-bar {
+        padding: 8px 10px 8px 16px;
+      }
+      .floating-bar-text {
+        font-size: 12.5px;
+      }
     }
   </style>
 </head>
@@ -682,9 +1190,26 @@
 
   <div class="ambient-glow" aria-hidden="true"></div>
 
+  <!-- 최상단 헤더 & 9개 전체 필터 연동 네비게이션 바 -->
   <header>
     <div class="header-inner">
-      <a href="#courses-list-section" class="brand-title">국비지원 부트캠프 모아보기</a>
+      <div class="header-top-row">
+        <a href="#top" class="brand-title">
+          <span class="brand-dot" aria-hidden="true"></span>
+          국비지원 부트캠프 모아보기
+        </a>
+      </div>
+      <nav class="top-nav" aria-label="과정 카테고리 네비게이션">
+        <button type="button" class="top-nav-btn active" data-nav-filter="all">전체 과정</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="free">✨ 전액무료 (자비부담 0원)</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="ai">🤖 AI</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="cloud">☁️ 클라우드</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="programming">💻 프로그래밍</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="offline">📍 대면교육</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="online">🏠 온라인교육</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="sesac">🌱 SeSAC</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="aicampus">🏛️ AI캠퍼스</button>
+      </nav>
     </div>
   </header>
 
@@ -711,7 +1236,9 @@
           <div id="ongoing-list-container" class="ongoing-slider-track">
             <a href="#course-card-0" class="ongoing-card" data-course-index="0">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 11월 09일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2026년 11월 09일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</h3>
               </div>
               <div class="ongoing-location">
@@ -722,7 +1249,9 @@
 
             <a href="#course-card-1" class="ongoing-card" data-course-index="1">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 11월 11일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2026년 11월 11일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">AI 데이터센터 인프라 엔지니어 양성과정(1기수)</h3>
               </div>
               <div class="ongoing-location">
@@ -733,7 +1262,9 @@
 
             <a href="#course-card-2" class="ongoing-card" data-course-index="2">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 07일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2026년 12월 07일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">Enterprise AI Cloud MSP 엔지니어 양성과정</h3>
               </div>
               <div class="ongoing-location">
@@ -744,7 +1275,9 @@
 
             <a href="#course-card-3" class="ongoing-card" data-course-index="3">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 10일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2026년 12월 10일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">SM유니버스 생성형 AI코딩 기반 엔터테인먼트 플랫폼 엔지니어 양성과정(15기수)</h3>
               </div>
               <div class="ongoing-location">
@@ -755,7 +1288,9 @@
 
             <a href="#course-card-4" class="ongoing-card" data-course-index="4">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 21일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2026년 12월 21일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(8기수)</h3>
               </div>
               <div class="ongoing-location">
@@ -766,7 +1301,9 @@
 
             <a href="#course-card-5" class="ongoing-card" data-course-index="5">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 21일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2026년 12월 21일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</h3>
               </div>
               <div class="ongoing-location">
@@ -777,7 +1314,9 @@
 
             <a href="#course-card-6" class="ongoing-card" data-course-index="6">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 29일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2026년 12월 29일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">AI 데이터센터 인프라 엔지니어 양성과정(2기수)</h3>
               </div>
               <div class="ongoing-location">
@@ -788,7 +1327,9 @@
 
             <a href="#course-card-7" class="ongoing-card" data-course-index="7">
               <div class="ongoing-card-top">
-                <span class="ongoing-date num">2027년 01월 12일 개강</span>
+                <div class="ongoing-top-row">
+                  <span class="ongoing-date num">2027년 01월 12일 개강</span>
+                </div>
                 <h3 class="ongoing-subject">클라우드 인프라 과정(7기수)</h3>
               </div>
               <div class="ongoing-location">
@@ -813,7 +1354,7 @@
         </div>
         <p class="intro-highlight">IT 취업의 시작, 나에게 맞는 교육과정을 찾는 것부터!</p>
         <div class="intro-paragraphs">
-          <p>개발자, 클라우드 엔지니어, 정보보안 전문가, 데이터 분석가까지.</p>
+          <p>AI, 인공지능, 클라우드, 개발자, 정보보안, 데이터분석 분야 등</p>
           <p>
             IT 분야 취업을 준비하고 있다면 수많은 국비지원 부트캠프 중<br />
             어떤 과정을 선택해야 할지 고민되시죠?
@@ -824,7 +1365,7 @@
       </section>
     </div>
 
-    <!-- 고민 리스트 영역 -->
+    <!-- 고민 리스트 영역 (클릭 시 맞춤 필터 및 섹션 이동) -->
     <div class="scroll-reveal">
       <section class="editorial-box">
         <div class="title-block">
@@ -833,30 +1374,56 @@
           </h2>
           <div class="accent-bar"></div>
         </div>
+        <p class="concern-guide">💡 해당되는 고민을 클릭하면 맞춤 과정이나 상담으로 바로 연결해 드려요.</p>
         <ul class="concern-list">
-          <li>
-            <span class="concern-num num">01.</span>
-            <span>IT 분야로 취업하고 싶은데 어떤 직무를 선택해야 할지 모르겠어요.</span>
+          <li data-action="consult">
+            <div class="concern-item-left">
+              <span class="concern-num num">01.</span>
+              <span>IT 분야로 취업하고 싶은데 어떤 직무를 선택해야 할지 모르겠어요.</span>
+            </div>
+            <span class="concern-action-tag">1:1 맞춤 상담 →</span>
           </li>
-          <li>
-            <span class="concern-num num">02.</span>
-            <span>국비지원 교육이 너무 많아서 어떤 과정이 좋은지 모르겠어요.</span>
+          <li data-filter="all">
+            <div class="concern-item-left">
+              <span class="concern-num num">02.</span>
+              <span>국비지원 교육이 너무 많아서 어떤 과정이 좋은지 모르겠어요.</span>
+            </div>
+            <span class="concern-action-tag">전체 비교하기 →</span>
           </li>
-          <li>
-            <span class="concern-num num">03.</span>
-            <span>집에서 가까운 교육기관을 찾고 싶어요.</span>
+          <li data-filter="offline">
+            <div class="concern-item-left">
+              <span class="concern-num num">03.</span>
+              <span>집에서 가까운 교육기관을 찾고 싶어요.</span>
+            </div>
+            <span class="concern-action-tag">대면교육 보기 →</span>
           </li>
-          <li>
-            <span class="concern-num num">04.</span>
-            <span>자비부담금 없이 무료로 수강할 수 있는 과정을 찾고 있어요.</span>
+          <li data-filter="free">
+            <div class="concern-item-left">
+              <span class="concern-num num">04.</span>
+              <span>자비부담금 없이 무료로 수강할 수 있는 과정을 찾고 있어요.</span>
+            </div>
+            <span class="concern-action-tag">전액무료 필터 →</span>
           </li>
-          <li>
-            <span class="concern-num num">05.</span>
-            <span>개발자, 클라우드, AI, 정보보안 중 어떤 분야가 나에게 맞을까요?</span>
+          <li data-filter="ai">
+            <div class="concern-item-left">
+              <span class="concern-num num">05.</span>
+              <span>개발자, 클라우드, AI, 정보보안 중 어떤 분야가 나에게 맞을까요?</span>
+            </div>
+            <span class="concern-action-tag">분야별 모아보기 →</span>
           </li>
-          <li>
-            <span class="concern-num num">06.</span>
-            <span>교육기관마다 교육 내용과 취업 지원이 어떻게 다른지 궁금해요.</span>
+          <li data-action="consult">
+            <div class="concern-item-left">
+              <span class="concern-num num">06.</span>
+              <span>교육기관마다 교육 내용과 취업 지원이 어떻게 다른지 궁금해요.</span>
+            </div>
+            <span class="concern-action-tag">무료 과정 상담 →</span>
+          </li>
+          <li data-filter="sesac">
+            <div class="concern-item-left">
+              <span class="concern-num num">07.</span>
+              <span>국비지원을 받았지만 한번 더 가능할까요?</span>
+            </div>
+            <span class="concern-action-tag">가능한과정 →</span>
           </li>
         </ul>
         <p class="concern-closing">
@@ -867,7 +1434,7 @@
 
     <!-- 맞춤 과정 상담신청 영역 (구글 시트 N열 '상담신청링크' 연동) -->
     <div class="scroll-reveal">
-      <section class="consult-box">
+      <section id="consult-section" class="consult-box">
         <p class="consult-title">어떤 과정을 선택해야 할지 모르겠다면</p>
         <a id="consult-link-btn" href="https://naver.me/FHOGgOaN" target="_blank" rel="noopener noreferrer" class="consult-btn">
           나에게 맞는 과정 상담신청하기
@@ -875,7 +1442,7 @@
       </section>
     </div>
 
-    <!-- 모집 중인 국비지원 과정 목록 타이틀 -->
+    <!-- 모집 중인 국비지원 과정 목록 타이틀 & 조건별 필터 탭 -->
     <div id="courses-list-section">
       <div class="scroll-reveal list-heading">
         <h2 class="section-main-title">
@@ -883,11 +1450,29 @@
         </h2>
         <div class="accent-bar"></div>
       </div>
+
+      <div class="scroll-reveal is-visible filter-bar-wrap">
+        <div class="filter-tabs" role="tablist" aria-label="과정 조건별 필터">
+          <button type="button" class="filter-tab-btn active" data-filter-key="all">전체 과정</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="free">✨ 전액무료 (자비부담 0원)</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="ai">🤖 AI</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="cloud">☁️ 클라우드</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="programming">💻 프로그래밍</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="offline">📍 대면교육</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="online">🏠 온라인교육</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="sesac">🌱 SeSAC</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="aicampus">🏛️ AI캠퍼스</button>
+        </div>
+        <div class="filter-status-row">
+          <span>개강일 빠른순 자동 정렬</span>
+          <span>총 <strong id="visible-course-count" class="filter-count-highlight num">8</strong>개 과정</span>
+        </div>
+      </div>
     </div>
 
     <!-- 과정 카드 리스트 (네이버 검색로봇 수집용 정적 HTML 내장 & 접속 시 구글 시트 최신 데이터로 자동 교체) -->
     <div id="course-list-container" class="course-list">
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all ai programming offline">
         <article id="course-card-0" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 11월 09일 개강</span>
@@ -895,14 +1480,13 @@
           </div>
           <h3 class="course-title">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>교육기관:</dt><dd class="strong-white">한국정보교육원</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 11월 09일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 신림(당곡역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">9,493,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">400,000원</dd></div>
+            <div class="spec-row"><dt>교육기관</dt><dd class="strong-white">한국정보교육원</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 11월 09일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>서울 신림(당곡역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">9,493,000원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-white">400,000원</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://k-edu-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -911,7 +1495,7 @@
         </article>
       </div>
 
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all free ai cloud offline aicampus">
         <article id="course-card-1" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 11월 11일 개강</span>
@@ -919,14 +1503,13 @@
           </div>
           <h3 class="course-title">AI 데이터센터 인프라 엔지니어 양성과정(1기수)</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">kt cloud</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>AI 데이터센터 인프라 엔지니어 양성과정(1기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 11월 11일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 강남(강남역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>AI캠퍼스</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">17,424,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">0원(전액무료)</dd></div>
+            <div class="spec-row"><dt>주관기관</dt><dd class="strong-white">kt cloud</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 11월 11일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>서울 강남(강남역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>AI캠퍼스</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">17,424,000원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-free">0원(전액무료)</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://ktcloud-aicampus.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -935,7 +1518,7 @@
         </article>
       </div>
 
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all free ai cloud offline sesac">
         <article id="course-card-2" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 12월 07일 개강</span>
@@ -943,14 +1526,13 @@
           </div>
           <h3 class="course-title">Enterprise AI Cloud MSP 엔지니어 양성과정</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">메가존클라우드 x SeSAC</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>Enterprise AI Cloud MSP 엔지니어 양성과정</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 07일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 영등포(문래역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>SeSAC 교육(국민내일배움카드 미사용)</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">0원(서울시 지원)</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">0원</dd></div>
+            <div class="spec-row"><dt>주관기관</dt><dd class="strong-white">메가존클라우드 x SeSAC</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 12월 07일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>서울 영등포(문래역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>SeSAC 교육(국민내일배움카드 미사용)</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">0원(서울시 지원)</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-free">0원</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://sesac-cloud.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -959,7 +1541,7 @@
         </article>
       </div>
 
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all ai programming offline">
         <article id="course-card-3" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 12월 10일 개강</span>
@@ -967,14 +1549,13 @@
           </div>
           <h3 class="course-title">SM유니버스 생성형 AI코딩 기반 엔터테인먼트 플랫폼 엔지니어 양성과정(15기수)</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">SM UNIVERSE</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>SM유니버스 생성형 AI코딩 기반 엔터테인먼트 플랫폼 엔지니어 양성과정(15기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 10일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 금천구(가산디지털단지역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">18,876,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">600,000원</dd></div>
+            <div class="spec-row"><dt>주관기관</dt><dd class="strong-white">SM UNIVERSE</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 12월 10일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>서울 금천구(가산디지털단지역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">18,876,000원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-white">600,000원</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://smu-it.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -983,7 +1564,7 @@
         </article>
       </div>
 
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all ai programming offline">
         <article id="course-card-4" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 12월 21일 개강</span>
@@ -991,14 +1572,13 @@
           </div>
           <h3 class="course-title">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(8기수)</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>교육기관:</dt><dd class="strong-white">한국정보교육원</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(8기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 21일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 신림(당곡역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">9,493,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">400,000원</dd></div>
+            <div class="spec-row"><dt>교육기관</dt><dd class="strong-white">한국정보교육원</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 12월 21일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>서울 신림(당곡역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">9,493,000원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-white">400,000원</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://k-edu-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -1007,7 +1587,7 @@
         </article>
       </div>
 
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all ai programming offline">
         <article id="course-card-5" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 12월 21일 개강</span>
@@ -1015,1041 +1595,13 @@
           </div>
           <h3 class="course-title">AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">한국직업능력교육원 안산캠퍼스</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><
-모바일에서 손가락 터치로 좌우 스크롤(스와이프)하여 진행중인 부트캠프 목록을 자유롭게 넘겨볼 수 있는 기능을 추가했습니다.
-주요 반영 내용
-모바일 터치 좌우 스크롤 이동: 모바일 화면에서 손가락으로 좌우로 밀면 원하는 방향으로 부드럽게 이동하며, 빠르게 밀었을 때 자연스러운 관성 스크롤과 무한 반복이 함께 작동합니다.
-오작동 클릭 방지: 손가락으로 좌우 스크롤(스와이프)하는 도중에는 카드가 실수로 클릭되지 않으며, 원하는 과정을 가볍게 터치(탭)했을 때만 하단 상세 과정으로 이동합니다.
-자동 회전 일시정지 및 재개: 손가락을 대고 스크롤하는 동안에는 자동 회전이 잠시 멈추고, 손을 떼면 잠시 후 다시 왼쪽으로 천천히 회전합니다.
-아래 전체 코드를 복사하여 index.html 파일에 그대로 붙여넣어 바로 사용하시면 됩니다.
-Html
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>국비지원 부트캠프 모아보기 | IT·개발자·클라우드·AI 교육 과정 비교</title>
-  <meta name="description" content="클라우드, 개발자, AI, IT, 정보보안 등 국내 국비지원 부트캠프를 한눈에 모아보고 비교해보세요." />
-  
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://www.free-bootcamp.co.kr/" />
-
-  <link rel="shortcut icon" href="https://postfiles.pstatic.net/MjAyNjExMDZfMTIg/MDAxNzkzOTU2MjMxMDU4.7TkLTbu2eAmNQbms_VanyGu6ys6-XDOFKUZb6E8r1bAg.zT2osxB-8BcZA1sZhewmXYLbjLsgdqQPPOdVQDV0jlwg.PNG/image.png?type=w773" type="image/png" />
-  <link rel="icon" href="https://postfiles.pstatic.net/MjAyNjExMDZfMTIg/MDAxNzkzOTU2MjMxMDU4.7TkLTbu2eAmNQbms_VanyGu6ys6-XDOFKUZb6E8r1bAg.zT2osxB-8BcZA1sZhewmXYLbjLsgdqQPPOdVQDV0jlwg.PNG/image.png?type=w773" type="image/png" />
-  
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.free-bootcamp.co.kr/" />
-  <meta property="og:title" content="국비지원 부트캠프 모아보기 | IT·개발자·클라우드·AI 교육 과정 비교" />
-  <meta property="og:description" content="클라우드, 개발자, AI, IT, 정보보안 등 국내 국비지원 부트캠프를 한눈에 모아보고 비교해보세요." />
-  <meta property="og:image" content="https://postfiles.pstatic.net/MjAyNjExMDZfMTIg/MDAxNzkzOTU2MjMxMDU4.7TkLTbu2eAmNQbms_VanyGu6ys6-XDOFKUZb6E8r1bAg.zT2osxB-8BcZA1sZhewmXYLbjLsgdqQPPOdVQDV0jlwg.PNG/image.png?type=w773" />
-
-  <meta name="naver-site-verification" content="ecc2fba532f8952ef4747a0b3bb770b51a0be161" />
-
-  <!-- Vercel Web Analytics -->
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #07090E;
-      --surface: #0D121C;
-      --text: #F8FAFC;
-      --text-secondary: #CBD5E1;
-      --text-muted: #94A3B8;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(59, 130, 246, 0.5);
-      --accent: #2563EB;
-      --accent-hover: #1D4ED8;
-      --accent-light: #60A5FA;
-      --sky: #38BDF8;
-      --sky-hover: #0EA5E9;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      letter-spacing: 0.01em;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .num {
-      font-family: 'JetBrains Mono', 'Noto Sans KR', monospace;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* 배경 은은한 광원 효과 */
-    .ambient-glow {
-      pointer-events: none;
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .ambient-glow::before {
-      content: "";
-      position: absolute;
-      top: -180px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 960px;
-      height: 460px;
-      border-radius: 9999px;
-      background: rgba(29, 78, 216, 0.15);
-      filter: blur(130px);
-    }
-
-    .ambient-glow::after {
-      content: "";
-      position: absolute;
-      top: 45%;
-      right: -160px;
-      width: 520px;
-      height: 520px;
-      border-radius: 9999px;
-      background: rgba(30, 58, 138, 0.12);
-      filter: blur(140px);
-    }
-
-    /* 상단 헤더 */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: rgba(7, 9, 14, 0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      max-width: 896px;
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #FFFFFF;
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      transition: color 0.15s ease;
-    }
-
-    .brand-title:hover {
-      color: var(--accent-light);
-    }
-
-    /* 메인 레이아웃 */
-    main {
-      position: relative;
-      z-index: 10;
-      max-width: 896px;
-      margin: 0 auto;
-      padding: 56px 24px 64px;
-    }
-
-    /* 스크롤 올리고 내릴 때마다 나타났다가 사라지는 애니메이션 */
-    .scroll-reveal {
-      opacity: 0;
-      transform: translateY(36px) scale(0.985);
-      transition:
-        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-
-    .scroll-reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    /* 소개 및 고민 섹션 카드 */
-    .editorial-box {
-      background: rgba(13, 18, 28, 0.9);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 48px;
-      margin-bottom: 56px;
-    }
-
-    .editorial-box.center-box {
-      text-align: center;
-    }
-
-    .title-block {
-      width: 100%;
-      text-align: center;
-      padding-bottom: 28px;
-      margin-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-main-title {
-      font-size: clamp(1.85rem, 3.8vw, 2.75rem);
-      font-weight: 900;
-      line-height: 1.3;
-      letter-spacing: -0.02em;
-      color: #FFFFFF;
-      text-align: center;
-    }
-
-    .accent-underline {
-      color: var(--accent-light);
-      text-decoration: underline;
-      text-decoration-color: rgba(59, 130, 246, 0.6);
-      text-decoration-thickness: 4px;
-      text-underline-offset: 8px;
-    }
-
-    .accent-bar {
-      width: 112px;
-      height: 6px;
-      background: linear-gradient(90deg, #2563EB, #60A5FA, #2563EB);
-      border-radius: 9999px;
-      margin: 24px auto 0;
-    }
-
-    /* 상단 진행중인 부트캠프 요약 슬라이드 영역 */
-    .ongoing-section {
-      background: rgba(13, 18, 28, 0.9);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px 36px 36px;
-      margin-bottom: 56px;
-    }
-
-    .ongoing-header {
-      width: 100%;
-      text-align: center;
-      padding-bottom: 24px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .ongoing-controls-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .ongoing-guide-text {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .ongoing-nav-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .ongoing-nav-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
-    }
-
-    .ongoing-nav-btn:hover:not(:disabled) {
-      border-color: var(--border-hover);
-      background: rgba(37, 99, 235, 0.18);
-      color: var(--accent-light);
-    }
-
-    .ongoing-slider-viewport {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
-      padding: 4px 0 8px;
-      touch-action: pan-y;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    .ongoing-slider-track {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: calc((100% - 32px) / 3);
-      gap: 16px;
-      will-change: transform;
-    }
-
-    .ongoing-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 20px;
-      min-height: 196px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-      transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
-    }
-
-    .ongoing-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      background: rgba(18, 25, 40, 0.95);
-    }
-
-    .ongoing-card-top {
-      margin-bottom: 12px;
-    }
-
-    .ongoing-date {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent-light);
-      margin-bottom: 10px;
-    }
-
-    .ongoing-subject {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.45;
-      color: #FFFFFF;
-      word-break: keep-all;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .ongoing-location {
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      word-break: keep-all;
-    }
-
-    .ongoing-location-label {
-      color: var(--text-muted);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    .ongoing-location-value {
-      color: #E2E8F0;
-      font-weight: 600;
-      text-align: right;
-    }
-
-    .intro-highlight {
-      font-size: 20px;
-      font-weight: 700;
-      color: #93C5FD;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-
-    .intro-paragraphs {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .intro-paragraphs p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .intro-paragraphs p:last-child {
-      color: #FFFFFF;
-      font-weight: 600;
-      padding-top: 4px;
-      margin-bottom: 0;
-    }
-
-    .concern-list {
-      list-style: none;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 32px;
-    }
-
-    .concern-list li {
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      font-size: 16px;
-      color: #E2E8F0;
-    }
-
-    .concern-list li:last-child {
-      border-bottom: none;
-    }
-
-    .concern-num {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent-light);
-      flex-shrink: 0;
-    }
-
-    .concern-closing {
-      font-size: 18px;
-      font-weight: 700;
-      color: #FFFFFF;
-      text-align: center;
-    }
-
-    /* 상담신청 섹션 */
-    .consult-box {
-      background: linear-gradient(180deg, #0F172A 0%, #0D121C 100%);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      border-radius: 16px;
-      padding: 40px 32px;
-      text-align: center;
-      margin-bottom: 72px;
-    }
-
-    .consult-title {
-      font-size: clamp(1.25rem, 2.5vw, 1.55rem);
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 24px;
-      letter-spacing: -0.01em;
-    }
-
-    .consult-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 32px;
-      background-color: var(--sky);
-      color: #07090E;
-      font-size: 16px;
-      font-weight: 800;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: background-color 0.15s ease;
-    }
-
-    .consult-btn:hover {
-      background-color: var(--sky-hover);
-    }
-
-    /* 과정 목록 타이틀 (제목만 중앙정렬 & 강조) */
-    #courses-list-section {
-      scroll-margin-top: 96px;
-    }
-
-    .list-heading {
-      width: 100%;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 28px;
-      margin-bottom: 40px;
-    }
-
-    /* 과정 카드 (한 줄에 1개씩) */
-    .course-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
-    .course-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px;
-      scroll-margin-top: 96px;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .course-card:hover {
-      border-color: var(--border-hover);
-    }
-
-    .course-card.is-highlighted {
-      border-color: var(--sky);
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
-    }
-
-    .course-meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .course-meta .start-badge {
-      color: var(--accent-light);
-      font-weight: 600;
-    }
-
-    .course-title {
-      font-size: 22px;
-      font-weight: 700;
-      line-height: 1.4;
-      color: #FFFFFF;
-      padding-bottom: 20px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      word-break: keep-all;
-    }
-
-    .spec-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .spec-row {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      align-items: baseline;
-      font-size: 15px;
-    }
-
-    .spec-row dt {
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .spec-row dd {
-      color: #E2E8F0;
-      word-break: keep-all;
-    }
-
-    .spec-row dd.strong-white {
-      font-weight: 700;
-      color: #FFFFFF;
-    }
-
-    .spec-row dd.strong-accent {
-      font-weight: 700;
-      color: var(--accent-light);
-    }
-
-    .course-footer {
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    /* 홈페이지(상세내용) 버튼 - 하늘색 */
-    .detail-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 20px;
-      background-color: var(--sky);
-      color: #07090E;
-      font-size: 14px;
-      font-weight: 700;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: background-color 0.15s ease;
-    }
-
-    .detail-btn:hover {
-      background-color: var(--sky-hover);
-    }
-
-    /* 지원접수 버튼 */
-    .apply-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 20px;
-      background-color: var(--accent);
-      color: #FFFFFF;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: background-color 0.15s ease;
-    }
-
-    .apply-btn:hover {
-      background-color: var(--accent-hover);
-    }
-
-    .status-message {
-      text-align: center;
-      padding: 48px 24px;
-      color: var(--text-secondary);
-      font-size: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    /* 하단 푸터 */
-    footer {
-      position: relative;
-      z-index: 10;
-      background: #05070B;
-      border-top: 1px solid var(--border);
-      margin-top: 64px;
-    }
-
-    .footer-inner {
-      max-width: 896px;
-      margin: 0 auto;
-      padding: 32px 24px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 16px;
-      font-size: 12px;
-      color: #94A3B8;
-    }
-
-    .footer-left {
-      text-align: left;
-    }
-
-    .footer-brand {
-      font-size: 14px;
-      font-weight: 700;
-      color: #E2E8F0;
-      margin-bottom: 4px;
-    }
-
-    .footer-manager {
-      color: #94A3B8;
-    }
-
-    .footer-right {
-      text-align: right;
-      color: #94A3B8;
-    }
-
-    @media (max-width: 768px) {
-      .ongoing-slider-track {
-        grid-auto-columns: calc((100% - 16px) / 2);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .editorial-box,
-      .ongoing-section,
-      .course-card,
-      .consult-box {
-        padding: 24px;
-      }
-      .ongoing-slider-track {
-        grid-auto-columns: 100%;
-      }
-      .course-title {
-        font-size: 18px;
-      }
-      .course-footer {
-        grid-template-columns: 1fr;
-      }
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .footer-right {
-        text-align: left;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="ambient-glow" aria-hidden="true"></div>
-
-  <header>
-    <div class="header-inner">
-      <a href="#courses-list-section" class="brand-title">국비지원 부트캠프 모아보기</a>
-    </div>
-  </header>
-
-  <main id="top">
-    <!-- 상단 진행중인 부트캠프 요약 슬라이드 영역 -->
-    <div class="scroll-reveal is-visible">
-      <section id="ongoing-bootcamp-section" class="ongoing-section" aria-label="진행중인 부트캠프">
-        <div class="ongoing-header">
-          <h2 class="section-main-title">
-            진행중인 <span class="accent-underline">부트캠프</span>
-          </h2>
-          <div class="accent-bar"></div>
-        </div>
-
-        <div class="ongoing-controls-bar">
-          <span class="ongoing-guide-text">과정을 클릭하면 하단 상세 과정으로 이동합니다.</span>
-          <div class="ongoing-nav-group">
-            <button type="button" id="ongoing-prev-btn" class="ongoing-nav-btn" aria-label="이전 과정 보기">&#8249;</button>
-            <button type="button" id="ongoing-next-btn" class="ongoing-nav-btn" aria-label="다음 과정 보기">&#8250;</button>
-          </div>
-        </div>
-
-        <div id="ongoing-slider-viewport" class="ongoing-slider-viewport">
-          <div id="ongoing-list-container" class="ongoing-slider-track">
-            <a href="#course-card-0" class="ongoing-card" data-course-index="0">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 11월 09일 개강</span>
-                <h3 class="ongoing-subject">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">서울 신림(당곡역)</span>
-              </div>
-            </a>
-
-            <a href="#course-card-1" class="ongoing-card" data-course-index="1">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 11월 11일 개강</span>
-                <h3 class="ongoing-subject">AI 데이터센터 인프라 엔지니어 양성과정(1기수)</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">서울 강남(강남역)</span>
-              </div>
-            </a>
-
-            <a href="#course-card-2" class="ongoing-card" data-course-index="2">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 07일 개강</span>
-                <h3 class="ongoing-subject">Enterprise AI Cloud MSP 엔지니어 양성과정</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">서울 영등포(문래역)</span>
-              </div>
-            </a>
-
-            <a href="#course-card-3" class="ongoing-card" data-course-index="3">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 10일 개강</span>
-                <h3 class="ongoing-subject">SM유니버스 생성형 AI코딩 기반 엔터테인먼트 플랫폼 엔지니어 양성과정(15기수)</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">서울 금천구(가산디지털단지역)</span>
-              </div>
-            </a>
-
-            <a href="#course-card-4" class="ongoing-card" data-course-index="4">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 21일 개강</span>
-                <h3 class="ongoing-subject">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(8기수)</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">서울 신림(당곡역)</span>
-              </div>
-            </a>
-
-            <a href="#course-card-5" class="ongoing-card" data-course-index="5">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 21일 개강</span>
-                <h3 class="ongoing-subject">AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">경기도 안산시(4호선 중앙역)</span>
-              </div>
-            </a>
-
-            <a href="#course-card-6" class="ongoing-card" data-course-index="6">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2026년 12월 29일 개강</span>
-                <h3 class="ongoing-subject">AI 데이터센터 인프라 엔지니어 양성과정(2기수)</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">서울 강남(강남역)</span>
-              </div>
-            </a>
-
-            <a href="#course-card-7" class="ongoing-card" data-course-index="7">
-              <div class="ongoing-card-top">
-                <span class="ongoing-date num">2027년 01월 12일 개강</span>
-                <h3 class="ongoing-subject">클라우드 인프라 과정(7기수)</h3>
-              </div>
-              <div class="ongoing-location">
-                <span class="ongoing-location-label">교육장소</span>
-                <span class="ongoing-location-value">온라인수업</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- 소개 영역 -->
-    <div class="scroll-reveal">
-      <section class="editorial-box center-box">
-        <div class="title-block">
-          <h1 class="section-main-title">
-            국비지원 부트캠프,<br />
-            <span class="accent-underline">나에게 맞는 과정을 한눈에!</span>
-          </h1>
-          <div class="accent-bar"></div>
-        </div>
-        <p class="intro-highlight">IT 취업의 시작, 나에게 맞는 교육과정을 찾는 것부터!</p>
-        <div class="intro-paragraphs">
-          <p>개발자, 클라우드 엔지니어, 정보보안 전문가, 데이터 분석가까지.</p>
-          <p>
-            IT 분야 취업을 준비하고 있다면 수많은 국비지원 부트캠프 중<br />
-            어떤 과정을 선택해야 할지 고민되시죠?
-          </p>
-          <p>교육 분야부터 교육 기간, 교육 장소, 자비부담금, 취업 분야까지.</p>
-          <p>국비지원 부트캠프 모아보기에서 나에게 맞는 IT 교육과정을 쉽고 편리하게 비교해 보세요.</p>
-        </div>
-      </section>
-    </div>
-
-    <!-- 고민 리스트 영역 -->
-    <div class="scroll-reveal">
-      <section class="editorial-box">
-        <div class="title-block">
-          <h2 class="section-main-title">
-            이런 <span class="accent-underline">고민</span>을 하고 있다면?
-          </h2>
-          <div class="accent-bar"></div>
-        </div>
-        <ul class="concern-list">
-          <li>
-            <span class="concern-num num">01.</span>
-            <span>IT 분야로 취업하고 싶은데 어떤 직무를 선택해야 할지 모르겠어요.</span>
-          </li>
-          <li>
-            <span class="concern-num num">02.</span>
-            <span>국비지원 교육이 너무 많아서 어떤 과정이 좋은지 모르겠어요.</span>
-          </li>
-          <li>
-            <span class="concern-num num">03.</span>
-            <span>집에서 가까운 교육기관을 찾고 싶어요.</span>
-          </li>
-          <li>
-            <span class="concern-num num">04.</span>
-            <span>자비부담금 없이 무료로 수강할 수 있는 과정을 찾고 있어요.</span>
-          </li>
-          <li>
-            <span class="concern-num num">05.</span>
-            <span>개발자, 클라우드, AI, 정보보안 중 어떤 분야가 나에게 맞을까요?</span>
-          </li>
-          <li>
-            <span class="concern-num num">06.</span>
-            <span>교육기관마다 교육 내용과 취업 지원이 어떻게 다른지 궁금해요.</span>
-          </li>
-        </ul>
-        <p class="concern-closing">
-          여러분의 고민을 해결할 수 있도록 다양한 국비지원 IT 교육과정을 한곳에 모았습니다.
-        </p>
-      </section>
-    </div>
-
-    <!-- 맞춤 과정 상담신청 영역 (구글 시트 N열 '상담신청링크' 연동) -->
-    <div class="scroll-reveal">
-      <section class="consult-box">
-        <p class="consult-title">어떤 과정을 선택해야 할지 모르겠다면</p>
-        <a id="consult-link-btn" href="https://naver.me/FHOGgOaN" target="_blank" rel="noopener noreferrer" class="consult-btn">
-          나에게 맞는 과정 상담신청하기
-        </a>
-      </section>
-    </div>
-
-    <!-- 모집 중인 국비지원 과정 목록 타이틀 -->
-    <div id="courses-list-section">
-      <div class="scroll-reveal list-heading">
-        <h2 class="section-main-title">
-          모집 중인 <span class="accent-underline">국비지원 과정 목록</span>
-        </h2>
-        <div class="accent-bar"></div>
-      </div>
-    </div>
-
-    <!-- 과정 카드 리스트 (네이버 검색로봇 수집용 정적 HTML 내장 & 접속 시 구글 시트 최신 데이터로 자동 교체) -->
-    <div id="course-list-container" class="course-list">
-      <div class="scroll-reveal is-visible">
-        <article id="course-card-0" class="course-card">
-          <div class="course-meta num">
-            <span class="start-badge">2026년 11월 09일 개강</span>
-            <span>K-디지털트레이닝 · 오프라인 대면수업</span>
-          </div>
-          <h3 class="course-title">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</h3>
-          <dl class="spec-list">
-            <div class="spec-row"><dt>교육기관:</dt><dd class="strong-white">한국정보교육원</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 11월 09일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 신림(당곡역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">9,493,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">400,000원</dd></div>
-          </dl>
-          <div class="course-footer">
-            <a href="https://k-edu-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
-            <a href="https://naver.me/5imEQFuO" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="scroll-reveal is-visible">
-        <article id="course-card-1" class="course-card">
-          <div class="course-meta num">
-            <span class="start-badge">2026년 11월 11일 개강</span>
-            <span>AI캠퍼스 · 오프라인 대면수업</span>
-          </div>
-          <h3 class="course-title">AI 데이터센터 인프라 엔지니어 양성과정(1기수)</h3>
-          <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">kt cloud</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>AI 데이터센터 인프라 엔지니어 양성과정(1기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 11월 11일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 강남(강남역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>AI캠퍼스</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">17,424,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">0원(전액무료)</dd></div>
-          </dl>
-          <div class="course-footer">
-            <a href="https://ktcloud-aicampus.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
-            <a href="https://naver.me/xaT1r6l5" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="scroll-reveal is-visible">
-        <article id="course-card-2" class="course-card">
-          <div class="course-meta num">
-            <span class="start-badge">2026년 12월 07일 개강</span>
-            <span>SeSAC 교육(국민내일배움카드 미사용) · 오프라인 대면수업</span>
-          </div>
-          <h3 class="course-title">Enterprise AI Cloud MSP 엔지니어 양성과정</h3>
-          <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">메가존클라우드 x SeSAC</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>Enterprise AI Cloud MSP 엔지니어 양성과정</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 07일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 영등포(문래역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>SeSAC 교육(국민내일배움카드 미사용)</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">0원(서울시 지원)</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">0원</dd></div>
-          </dl>
-          <div class="course-footer">
-            <a href="https://sesac-cloud.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
-            <a href="https://naver.me/x525CcnX" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="scroll-reveal is-visible">
-        <article id="course-card-3" class="course-card">
-          <div class="course-meta num">
-            <span class="start-badge">2026년 12월 10일 개강</span>
-            <span>K-디지털트레이닝 · 오프라인 대면수업</span>
-          </div>
-          <h3 class="course-title">SM유니버스 생성형 AI코딩 기반 엔터테인먼트 플랫폼 엔지니어 양성과정(15기수)</h3>
-          <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">SM UNIVERSE</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>SM유니버스 생성형 AI코딩 기반 엔터테인먼트 플랫폼 엔지니어 양성과정(15기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 10일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 금천구(가산디지털단지역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">18,876,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">600,000원</dd></div>
-          </dl>
-          <div class="course-footer">
-            <a href="https://smu-it.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
-            <a href="https://naver.me/5fdupQsq" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="scroll-reveal is-visible">
-        <article id="course-card-4" class="course-card">
-          <div class="course-meta num">
-            <span class="start-badge">2026년 12월 21일 개강</span>
-            <span>K-디지털트레이닝 · 오프라인 대면수업</span>
-          </div>
-          <h3 class="course-title">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(8기수)</h3>
-          <dl class="spec-list">
-            <div class="spec-row"><dt>교육기관:</dt><dd class="strong-white">한국정보교육원</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(8기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 21일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 신림(당곡역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">9,493,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">400,000원</dd></div>
-          </dl>
-          <div class="course-footer">
-            <a href="https://k-edu-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
-            <a href="https://naver.me/5imEQFuO" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="scroll-reveal is-visible">
-        <article id="course-card-5" class="course-card">
-          <div class="course-meta num">
-            <span class="start-badge">2026년 12월 21일 개강</span>
-            <span>원룸형기숙사 · K-디지털트레이닝 · 오프라인 대면수업</span>
-          </div>
-          <h3 class="course-title">AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</h3>
-          <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">한국직업능력교육원 안산캠퍼스</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 21일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>경기도 안산시(4호선 중앙역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업(기숙사제공)</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">9,151,250원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">400,000원</dd></div>
+            <div class="spec-row"><dt>주관기관</dt><dd class="strong-white">한국직업능력교육원 안산캠퍼스</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 12월 21일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>경기도 안산시(4호선 중앙역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업(기숙사제공)</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">9,151,250원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-white">400,000원</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://ai-iot-embedded-jh.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -2058,7 +1610,7 @@ Html
         </article>
       </div>
 
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all free ai cloud offline aicampus">
         <article id="course-card-6" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2026년 12월 29일 개강</span>
@@ -2066,14 +1618,13 @@ Html
           </div>
           <h3 class="course-title">AI 데이터센터 인프라 엔지니어 양성과정(2기수)</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">kt cloud</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>AI 데이터센터 인프라 엔지니어 양성과정(2기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2026년 12월 29일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>서울 강남(강남역)</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>오프라인 대면수업</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>AI캠퍼스</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">17,424,000원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">0원(전액무료)</dd></div>
+            <div class="spec-row"><dt>주관기관</dt><dd class="strong-white">kt cloud</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 12월 29일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>서울 강남(강남역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>AI캠퍼스</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">17,424,000원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-free">0원(전액무료)</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://ktcloud-aicampus.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -2082,7 +1633,7 @@ Html
         </article>
       </div>
 
-      <div class="scroll-reveal is-visible">
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all cloud online">
         <article id="course-card-7" class="course-card">
           <div class="course-meta num">
             <span class="start-badge">2027년 01월 12일 개강</span>
@@ -2090,14 +1641,13 @@ Html
           </div>
           <h3 class="course-title">클라우드 인프라 과정(7기수)</h3>
           <dl class="spec-list">
-            <div class="spec-row"><dt>주관기관:</dt><dd class="strong-white">kt cloud</dd></div>
-            <div class="spec-row"><dt>과정명:</dt><dd>클라우드 인프라 과정(7기수)</dd></div>
-            <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">2027년 01월 12일</dd></div>
-            <div class="spec-row"><dt>교육장소:</dt><dd>온라인수업</dd></div>
-            <div class="spec-row"><dt>교육방식:</dt><dd>실시간 비대면 교육</dd></div>
-            <div class="spec-row"><dt>교육유형:</dt><dd>K-디지털트레이닝</dd></div>
-            <div class="spec-row"><dt>교육비용:</dt><dd class="num">19,166,400원</dd></div>
-            <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">600,000원</dd></div>
+            <div class="spec-row"><dt>주관기관</dt><dd class="strong-white">kt cloud</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2027년 01월 12일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>온라인수업</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>실시간 비대면 교육</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">19,166,400원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-white">600,000원</dd></div>
           </dl>
           <div class="course-footer">
             <a href="https://ktcloud-infra-jw.vercel.app" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
@@ -2107,6 +1657,20 @@ Html
       </div>
     </div>
   </main>
+
+  <!-- 하단 플로팅 상담 바 (구글 시트 상담신청링크 자동 연동) -->
+  <div class="floating-bar" role="region" aria-label="빠른 상담 및 상단 이동">
+    <p class="floating-bar-text">나에게 딱 맞는 <span>국비지원 과정</span>이 고민된다면?</p>
+    <div class="floating-bar-actions">
+      <a id="floating-consult-btn" href="https://naver.me/FHOGgOaN" target="_blank" rel="noopener noreferrer" class="floating-consult-btn">
+        1:1 무료 상담신청
+      </a>
+      <button type="button" id="scroll-top-btn" class="floating-top-btn" aria-label="맨 위로 이동">↑</button>
+    </div>
+  </div>
+
+  <!-- 링크 복사 알림 토스트 -->
+  <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">과정 링크가 복사되었습니다!</div>
 
   <footer>
     <div class="footer-inner">
@@ -2247,6 +1811,18 @@ Html
       }
     ];
 
+    // 인라인 SVG 아이콘 모음
+    const ICONS = {
+      org: '<svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>',
+      calendar: '<svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      location: '<svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+      method: '<svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+      type: '<svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+      cost: '<svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
+      selfPay: '<svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>',
+      share: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'
+    };
+
     // 스크롤 애니메이션 관찰자 설정
     const observer = new IntersectionObserver(
       (entries) => {
@@ -2264,7 +1840,6 @@ Html
       }
     );
 
-    // 정적 요소 애니메이션 먼저 연결
     document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
 
     // HTML 특수문자 이스케이프 함수
@@ -2283,7 +1858,6 @@ Html
       let consultLink = settings && settings.consultLink ? settings.consultLink : "";
       let managerName = settings && settings.managerName ? settings.managerName : "";
 
-      // 혹시 이전 버전의 Apps Script를 사용 중이어서 배열 안에 값이 들어있는 경우까지 호환 처리
       if (!consultLink && Array.isArray(courses)) {
         const foundLinkRow = courses.find(c => c["상담신청링크"] && String(c["상담신청링크"]).trim() !== "");
         if (foundLinkRow) consultLink = String(foundLinkRow["상담신청링크"]).trim();
@@ -2293,10 +1867,13 @@ Html
         if (foundManagerRow) managerName = String(foundManagerRow["담당자명"]).trim();
       }
 
+      const finalConsultUrl = consultLink || DEFAULT_SETTINGS.consultLink;
+
       const consultBtn = document.getElementById("consult-link-btn");
-      if (consultBtn) {
-        consultBtn.href = consultLink || DEFAULT_SETTINGS.consultLink;
-      }
+      if (consultBtn) consultBtn.href = finalConsultUrl;
+
+      const floatingConsultBtn = document.getElementById("floating-consult-btn");
+      if (floatingConsultBtn) floatingConsultBtn.href = finalConsultUrl;
 
       const managerSpan = document.getElementById("footer-manager-name");
       if (managerSpan) {
@@ -2317,16 +1894,101 @@ Html
       return 99999999;
     }
 
-    // 개강일 빠른순으로 정렬하는 함수 (날짜가 같으면 시트에 적힌 원래 순서 유지)
+    // 실시간 D-Day 배지 HTML 생성 (개강일이 지났으면 '추가모집중' 자동 표시)
+    function getDdayBadgeHtml(dateStr) {
+      if (!dateStr) return "";
+      const match = String(dateStr).match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/);
+      if (!match) return "";
+
+      const targetDate = new Date(parseInt(match[1], 10), parseInt(match[2], 10) - 1, parseInt(match[3], 10));
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      targetDate.setHours(0, 0, 0, 0);
+
+      const diffTime = targetDate.getTime() - today.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays === 0) {
+        return `<span class="dday-badge urgent num">🔥 D-Day 오늘개강</span>`;
+      } else if (diffDays > 0 && diffDays <= 7) {
+        return `<span class="dday-badge urgent num">🔥 D-${diffDays} 마감임박</span>`;
+      } else if (diffDays > 7 && diffDays <= 21) {
+        return `<span class="dday-badge soon num">⚡ D-${diffDays} 모집중</span>`;
+      } else if (diffDays > 21) {
+        return `<span class="dday-badge open num">D-${diffDays} 모집중</span>`;
+      } else {
+        return `<span class="dday-badge extra num">✨ 추가모집중</span>`;
+      }
+    }
+
+    // ★ 구글 스프레드시트 데이터 기반 9개 필터(SeSAC, AI캠퍼스 포함) & 혜택 태그 자동 분류 ★
+    function analyzeCourseFeatures(course) {
+      const org = String(course["기관명"] || "");
+      const title = String(course["과정명"] || course["과목명"] || "");
+      const location = String(course["교육장소"] || "");
+      const method = String(course["교육방식"] || "");
+      const type = String(course["교육유형"] || "");
+      const selfPay = String(course["자비부담금"] || "");
+      const summary = String(course["상단요약"] || "");
+
+      const combined = `${org} ${title} ${location} ${method} ${type} ${selfPay} ${summary}`;
+      const subjectAndType = `${title} ${type} ${summary} ${org}`;
+      const deliveryText = `${location} ${method} ${summary}`;
+      const deliveryWithoutNonFace = deliveryText.replace(/비대면/g, "");
+
+      // 1) 전액무료 판별
+      const isFree = /^0원/.test(selfPay.trim()) || selfPay.includes("전액무료") || selfPay.includes("무료") || selfPay.trim() === "0";
+      // 2) AI 판별
+      const isAi = /AI|인공지능|생성형|머신러닝|딥러닝|LLM|데이터/i.test(subjectAndType);
+      // 3) 클라우드 판별
+      const isCloud = /클라우드|Cloud|MSP|인프라|데이터센터|AWS|Azure|쿠버네티스|Kubernetes|데브옵스|DevOps|서버|네트워크/i.test(subjectAndType);
+      // 4) 프로그래밍 판별
+      const isProgramming = /프로그래밍|개발|코딩|자바|Java|풀스택|백엔드|프론트엔드|파이썬|Python|C언어|C\+\+|임베디드|MCU|펌웨어|STM32|ESP32|사물인터넷|IoT|웹|앱|소프트웨어|플랫폼/i.test(subjectAndType);
+      // 5) 온라인교육 판별
+      const isOnline = /온라인|비대면|원격|화상|재택|줌|Zoom/i.test(deliveryText);
+      // 6) 대면교육 판별
+      const isOffline = /오프라인|대면|집체|출석|기숙사/i.test(deliveryWithoutNonFace) || !isOnline;
+      // 7) SeSAC 판별 (교육유형 및 상단요약 기준)
+      const isSesac = /SeSAC|새싹/i.test(`${type} ${summary}`);
+      // 8) AI캠퍼스 판별 (교육유형 및 상단요약 기준)
+      const isAiCampus = /AI캠퍼스|AI 캠퍼스/i.test(`${type} ${summary}`);
+
+      const isNoCard = combined.includes("미사용");
+      const isDorm = combined.includes("기숙사");
+      const isKdt = combined.includes("K-디지털") || combined.includes("AI캠퍼스");
+
+      const filterKeys = ["all"];
+      if (isFree) filterKeys.push("free");
+      if (isAi) filterKeys.push("ai");
+      if (isCloud) filterKeys.push("cloud");
+      if (isProgramming) filterKeys.push("programming");
+      if (isOffline) filterKeys.push("offline");
+      if (isOnline) filterKeys.push("online");
+      if (isSesac) filterKeys.push("sesac");
+      if (isAiCampus) filterKeys.push("aicampus");
+
+      const tagsHtml = [];
+      if (isFree) tagsHtml.push(`<span class="benefit-tag tag-free">✨ 자비부담 0원 (전액무료)</span>`);
+      if (isNoCard) tagsHtml.push(`<span class="benefit-tag tag-nocard">💳 내일배움카드 미사용</span>`);
+      if (isDorm) tagsHtml.push(`<span class="benefit-tag tag-dorm">🏠 원룸형 기숙사 제공</span>`);
+      if (isOnline) tagsHtml.push(`<span class="benefit-tag tag-online">💻 온라인 실시간 과정</span>`);
+      if (isKdt && !isNoCard) tagsHtml.push(`<span class="benefit-tag tag-kdt">🎓 국비지원 교육</span>`);
+
+      return {
+        isFree,
+        filterKeys: filterKeys.join(" "),
+        tagsHtml: tagsHtml.join("")
+      };
+    }
+
+    // 개강일 빠른순 정렬
     function sortCoursesByStartDate(courses) {
       return courses
         .map((course, index) => ({ course, index }))
         .sort((a, b) => {
           const dateA = parseStartDateValue(a.course["개강일"]);
           const dateB = parseStartDateValue(b.course["개강일"]);
-          if (dateA !== dateB) {
-            return dateA - dateB;
-          }
+          if (dateA !== dateB) return dateA - dateB;
           return a.index - b.index;
         })
         .map((item) => item.course);
@@ -2339,9 +2001,8 @@ Html
     let ongoingIsPaused = false;
     let ongoingAnimFrameId = null;
     let ongoingLastTimestamp = 0;
-    const ONGOING_AUTO_SPEED_PX_PER_SEC = 34; // 왼쪽 방향으로 천천히 이동하는 속도 (초당 픽셀)
+    const ONGOING_AUTO_SPEED_PX_PER_SEC = 34;
 
-    // 1세트(원본 과정 전체)의 정확한 가로 폭 계산
     function getOngoingSingleSetWidth() {
       const track = document.getElementById("ongoing-list-container");
       if (!track || ongoingCourseCount <= 0) return 0;
@@ -2350,7 +2011,6 @@ Html
       return cards[ongoingCourseCount].offsetLeft - cards[0].offsetLeft;
     }
 
-    // 카드 1칸 이동 폭 계산
     function getOngoingStepWidth() {
       const track = document.getElementById("ongoing-list-container");
       if (!track) return 280;
@@ -2364,7 +2024,6 @@ Html
       return 280;
     }
 
-    // 왼쪽 방향 무한 반복 애니메이션 루프
     function stepOngoingMarquee(timestamp) {
       if (!ongoingLastTimestamp) ongoingLastTimestamp = timestamp;
       const dt = Math.min((timestamp - ongoingLastTimestamp) / 1000, 0.1);
@@ -2374,12 +2033,10 @@ Html
       const singleSetWidth = getOngoingSingleSetWidth();
 
       if (track && singleSetWidth > 0) {
-        // 기본 자동 왼쪽 이동 (마우스 호버/터치 시 일시정지)
         if (!ongoingIsPaused) {
           ongoingCurrentOffset += ONGOING_AUTO_SPEED_PX_PER_SEC * dt;
         }
 
-        // 좌/우 화살표 클릭 또는 터치 관성 이동 시 부드러운 가감속 이동
         if (Math.abs(ongoingManualTargetDelta) > 0.5) {
           const moveStep = ongoingManualTargetDelta * Math.min(dt * 10, 0.35);
           ongoingCurrentOffset += moveStep;
@@ -2389,7 +2046,6 @@ Html
           ongoingManualTargetDelta = 0;
         }
 
-        // 끊김 없는 무한 루프 보정
         if (ongoingCurrentOffset >= singleSetWidth) {
           ongoingCurrentOffset = ongoingCurrentOffset % singleSetWidth;
         } else if (ongoingCurrentOffset < 0) {
@@ -2405,36 +2061,45 @@ Html
     let ongoingDidDrag = false;
     let ongoingTouchResumeTimer = null;
 
-    // 상단 요약 카드 클릭 시 하단 해당 상세 카드로 스크롤 및 강조
+    // 특정 과정 카드로 스크롤 및 하이라이트
+    function focusCourseCardByIndex(idx) {
+      const targetCard = document.getElementById(`course-card-${idx}`);
+      if (!targetCard) return;
+
+      const wrapper = targetCard.closest(".course-card-wrapper");
+      if (wrapper && wrapper.classList.contains("is-hidden")) {
+        applyCourseFilter("all");
+      }
+
+      targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      document.querySelectorAll(".course-card.is-highlighted").forEach((el) => {
+        el.classList.remove("is-highlighted");
+      });
+      targetCard.classList.add("is-highlighted");
+      setTimeout(() => {
+        targetCard.classList.remove("is-highlighted");
+      }, 2200);
+    }
+
     function bindOngoingCardClicks() {
       const ongoingContainer = document.getElementById("ongoing-list-container");
       if (!ongoingContainer) return;
 
       ongoingContainer.querySelectorAll(".ongoing-card").forEach((card) => {
         card.addEventListener("click", (e) => {
-          // 모바일 터치 스크롤(스와이프) 직후에는 의도치 않은 클릭 이동 방지
           if (ongoingDidDrag) {
             e.preventDefault();
             return;
           }
           const idx = card.getAttribute("data-course-index");
-          const targetCard = document.getElementById(`course-card-${idx}`);
-          if (targetCard) {
+          if (idx !== null) {
             e.preventDefault();
-            targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
-            document.querySelectorAll(".course-card.is-highlighted").forEach((el) => {
-              el.classList.remove("is-highlighted");
-            });
-            targetCard.classList.add("is-highlighted");
-            setTimeout(() => {
-              targetCard.classList.remove("is-highlighted");
-            }, 1800);
+            focusCourseCardByIndex(idx);
           }
         });
       });
     }
 
-    // 상단 슬라이드 네비게이션 및 모바일 터치 스크롤 & 무한 루프 이벤트 초기화
     function initOngoingSliderControls() {
       const viewport = document.getElementById("ongoing-slider-viewport");
       const prevBtn = document.getElementById("ongoing-prev-btn");
@@ -2449,7 +2114,6 @@ Html
         ongoingManualTargetDelta += getOngoingStepWidth();
       });
 
-      // PC 마우스 호버 시 일시정지
       viewport.addEventListener("mouseenter", () => {
         ongoingIsPaused = true;
       });
@@ -2457,7 +2121,6 @@ Html
         ongoingIsPaused = false;
       });
 
-      // 모바일 터치 드래그/스크롤 이동 지원
       let touchStartX = 0;
       let touchStartY = 0;
       let touchLastX = 0;
@@ -2490,7 +2153,6 @@ Html
         const totalDx = currentX - touchStartX;
         const totalDy = currentY - touchStartY;
 
-        // 가로 스크롤인지 세로 페이지 스크롤인지 판별
         if (isHorizontalSwipe === null && (Math.abs(totalDx) > 5 || Math.abs(totalDy) > 5)) {
           isHorizontalSwipe = Math.abs(totalDx) > Math.abs(totalDy);
         }
@@ -2507,7 +2169,6 @@ Html
           const dt = Math.max(now - touchLastTime, 1);
           const dx = currentX - touchLastX;
 
-          // 손가락 이동만큼 즉시 슬라이드 위치 반영 및 무한 루프 보정
           ongoingCurrentOffset -= dx;
           const singleSetWidth = getOngoingSingleSetWidth();
           if (singleSetWidth > 0) {
@@ -2523,14 +2184,13 @@ Html
             track.style.transform = `translate3d(${-ongoingCurrentOffset}px, 0, 0)`;
           }
 
-          touchVelocityX = dx / dt; // px per ms
+          touchVelocityX = dx / dt;
           touchLastX = currentX;
           touchLastTime = now;
         }
       }, { passive: false });
 
       function handleTouchEnd() {
-        // 빠르게 스와이프했을 때 자연스러운 관성 스크롤 적용
         if (isHorizontalSwipe && Math.abs(touchVelocityX) > 0.15) {
           ongoingManualTargetDelta += -touchVelocityX * 220;
         }
@@ -2551,7 +2211,7 @@ Html
       }
     }
 
-    // 상단 '진행중인 부트캠프' 요약 카드를 그려주는 함수 (개강일, 과목명, 교육장소 3가지만 표시 + 무한반복용 복제 세트 구성)
+    // 상단 진행중인 부트캠프 요약 슬라이드 렌더링
     function renderOngoingCourses(sortedCourses) {
       const ongoingContainer = document.getElementById("ongoing-list-container");
       if (!ongoingContainer) return;
@@ -2567,8 +2227,6 @@ Html
       }
 
       ongoingCourseCount = sortedCourses.length;
-
-      // 왼쪽으로 끝없이 자연스럽게 회전하도록 원본 세트 뒤에 동일 세트를 1회 이어 붙임
       const loopCourses = [...sortedCourses, ...sortedCourses];
 
       loopCourses.forEach((course, loopIdx) => {
@@ -2578,6 +2236,7 @@ Html
         const rawStartDate = escapeHtml(course["개강일"] || "");
         const startDateText = rawStartDate.includes("개강") ? rawStartDate : `${rawStartDate} 개강`;
         const location = escapeHtml(course["교육장소"] || "");
+        const ddayBadge = getDdayBadgeHtml(course["개강일"]);
 
         const card = document.createElement("a");
         card.href = `#course-card-${originalIndex}`;
@@ -2589,7 +2248,10 @@ Html
 
         card.innerHTML = `
           <div class="ongoing-card-top">
-            <span class="ongoing-date num">${startDateText}</span>
+            <div class="ongoing-top-row">
+              <span class="ongoing-date num">${startDateText}</span>
+              ${ddayBadge}
+            </div>
             <h3 class="ongoing-subject">${subject}</h3>
           </div>
           <div class="ongoing-location">
@@ -2604,7 +2266,76 @@ Html
       bindOngoingCardClicks();
     }
 
-    // 상단 '진행중인 부트캠프'와 하단 '모집 중인 국비지원 과정 목록'을 동시에 그려주는 함수
+    // 조건별 필터 적용 함수 (상단 네비게이션 바 & 과정 목록 필터 탭 동시 활성화)
+    let currentFilterKey = "all";
+
+    function applyCourseFilter(filterKey) {
+      currentFilterKey = filterKey;
+
+      // 하단 필터 탭 버튼 활성화 상태 업데이트
+      document.querySelectorAll(".filter-tab-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.getAttribute("data-filter-key") === filterKey);
+      });
+
+      // 최상단 네비게이션 바 버튼 활성화 상태 동기화
+      document.querySelectorAll(".top-nav-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.getAttribute("data-nav-filter") === filterKey);
+      });
+
+      const wrappers = document.querySelectorAll("#course-list-container .course-card-wrapper");
+      let visibleCount = 0;
+
+      wrappers.forEach((wrapper) => {
+        const keys = (wrapper.getAttribute("data-filter-keys") || "all").split(" ");
+        const isMatch = filterKey === "all" || keys.includes(filterKey);
+        wrapper.classList.toggle("is-hidden", !isMatch);
+        if (isMatch) visibleCount++;
+      });
+
+      const countEl = document.getElementById("visible-course-count");
+      if (countEl) countEl.textContent = String(visibleCount);
+
+      const emptyMsg = document.getElementById("filter-empty-msg");
+      if (visibleCount === 0) {
+        if (!emptyMsg) {
+          const msgDiv = document.createElement("div");
+          msgDiv.id = "filter-empty-msg";
+          msgDiv.className = "status-message";
+          msgDiv.textContent = "선택하신 조건에 해당하는 과정이 없습니다. 전체 과정을 확인해 보세요.";
+          document.getElementById("course-list-container").appendChild(msgDiv);
+        }
+      } else if (emptyMsg) {
+        emptyMsg.remove();
+      }
+    }
+
+    // 과정 링크 복사(공유) 토스트 함수
+    let toastTimer = null;
+    function copyCourseShareLink(courseIndex, courseTitle) {
+      const shareUrl = `${window.location.origin}${window.location.pathname}#course-card-${courseIndex}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).catch(() => {});
+      } else {
+        const tempInput = document.createElement("input");
+        tempInput.value = shareUrl;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        tempInput.remove();
+      }
+
+      const toast = document.getElementById("copy-toast");
+      if (toast) {
+        toast.textContent = `'${courseTitle.slice(0, 18)}...' 링크가 복사되었습니다!`;
+        toast.classList.add("show");
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2200);
+      }
+    }
+
+    // 상단 진행중인 부트캠프 & 하단 모집 과정 목록 렌더링
     function renderCourses(courses) {
       const container = document.getElementById("course-list-container");
       container.innerHTML = "";
@@ -2612,16 +2343,14 @@ Html
       if (!courses || courses.length === 0) {
         renderOngoingCourses([]);
         container.innerHTML = '<div class="status-message">현재 모집 중인 과정이 없습니다.</div>';
+        const countEl = document.getElementById("visible-course-count");
+        if (countEl) countEl.textContent = "0";
         return;
       }
 
-      // 화면에 그리기 전에 무조건 개강일 빠른순으로 자동 정렬
       const sortedCourses = sortCoursesByStartDate(courses);
-
-      // 1) 상단 진행중인 부트캠프 요약 슬라이드 렌더링
       renderOngoingCourses(sortedCourses);
 
-      // 2) 하단 모집 중인 국비지원 과정 목록 렌더링
       sortedCourses.forEach((course, index) => {
         const orgLabel = course["기관명칭"] ? escapeHtml(course["기관명칭"]) : "주관기관";
         const orgName = escapeHtml(course["기관명"]);
@@ -2634,56 +2363,132 @@ Html
         const selfPay = escapeHtml(course["자비부담금"]);
         const detailUrl = escapeHtml(course["상세링크"] || "#");
         const applyUrl = escapeHtml(course["지원링크"] || "#");
-        
-        // 상단요약 열에 값이 있으면 그 값을 쓰고, 비어 있으면 '교육유형 · 교육방식'으로 자동 표시
+
         const metaSummary = course["상단요약"] && String(course["상단요약"]).trim() !== ""
           ? escapeHtml(course["상단요약"])
           : `${type} · ${method}`;
 
-        // 개강일 뒤에 '개강' 글자가 없으면 자동으로 붙여서 배지에 표시
         const startBadgeText = startDate.includes("개강") ? startDate : `${startDate} 개강`;
+        const ddayBadge = getDdayBadgeHtml(course["개강일"]);
+        const features = analyzeCourseFeatures(course);
 
         const wrapper = document.createElement("div");
-        wrapper.className = "scroll-reveal";
+        wrapper.className = "scroll-reveal course-card-wrapper";
+        wrapper.setAttribute("data-filter-keys", features.filterKeys);
 
         wrapper.innerHTML = `
           <article id="course-card-${index}" class="course-card">
             <div class="course-meta num">
-              <span class="start-badge">${startBadgeText}</span>
+              <div class="course-meta-left">
+                <span class="start-badge">${startBadgeText}</span>
+                ${ddayBadge}
+              </div>
               <span>${metaSummary}</span>
             </div>
+            ${features.tagsHtml ? `<div class="benefit-tags-row">${features.tagsHtml}</div>` : ""}
             <h3 class="course-title">${title}</h3>
             <dl class="spec-list">
-              <div class="spec-row"><dt>${orgLabel}:</dt><dd class="strong-white">${orgName}</dd></div>
-              <div class="spec-row"><dt>과정명:</dt><dd>${title}</dd></div>
-              <div class="spec-row"><dt>개강일:</dt><dd class="num strong-accent">${startDate}</dd></div>
-              <div class="spec-row"><dt>교육장소:</dt><dd>${location}</dd></div>
-              <div class="spec-row"><dt>교육방식:</dt><dd>${method}</dd></div>
-              <div class="spec-row"><dt>교육유형:</dt><dd>${type}</dd></div>
-              <div class="spec-row"><dt>교육비용:</dt><dd class="num">${cost}</dd></div>
-              <div class="spec-row"><dt>자비부담금:</dt><dd class="num strong-white">${selfPay}</dd></div>
+              <div class="spec-row"><dt>${ICONS.org}${orgLabel}</dt><dd class="strong-white">${orgName}</dd></div>
+              <div class="spec-row"><dt>${ICONS.calendar}개강일</dt><dd class="num strong-accent">${startDate}</dd></div>
+              <div class="spec-row"><dt>${ICONS.location}교육장소</dt><dd>${location}</dd></div>
+              <div class="spec-row"><dt>${ICONS.method}교육방식</dt><dd>${method}</dd></div>
+              <div class="spec-row"><dt>${ICONS.type}교육유형</dt><dd>${type}</dd></div>
+              <div class="spec-row"><dt>${ICONS.cost}교육비용</dt><dd class="num">${cost}</dd></div>
+              <div class="spec-row spec-full"><dt>${ICONS.selfPay}자비부담금</dt><dd class="num ${features.isFree ? "strong-free" : "strong-white"}">${selfPay}</dd></div>
             </dl>
             <div class="course-footer">
               <a href="${detailUrl}" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(상세내용)</a>
               <a href="${applyUrl}" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
+              <button type="button" class="share-btn" data-share-index="${index}" data-share-title="${title}" aria-label="과정 링크 복사">
+                ${ICONS.share}공유
+              </button>
             </div>
           </article>
         `;
 
         container.appendChild(wrapper);
-        observer.observe(wrapper); // 새로 생성된 카드에도 스크롤 애니메이션 적용
+        observer.observe(wrapper);
       });
+
+      // 공유 버튼 이벤트 연결
+      container.querySelectorAll(".share-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = btn.getAttribute("data-share-index");
+          const rawTitle = btn.getAttribute("data-share-title") || "국비지원 과정";
+          copyCourseShareLink(idx, rawTitle);
+        });
+      });
+
+      applyCourseFilter(currentFilterKey);
+    }
+
+    // 최상단 네비게이션 바, 필터 탭, 고민 리스트 클릭, 맨 위로 이동 버튼 이벤트 초기화
+    function initInteractiveUI() {
+      // 최상단 네비게이션 바 클릭 시 해당 필터 적용 후 모집 과정 목록으로 이동
+      document.querySelectorAll(".top-nav-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.getAttribute("data-nav-filter") || "all";
+          applyCourseFilter(key);
+          const listSec = document.getElementById("courses-list-section");
+          if (listSec) {
+            listSec.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // 모집 과정 목록 내 필터 탭 클릭
+      document.querySelectorAll(".filter-tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.getAttribute("data-filter-key") || "all";
+          applyCourseFilter(key);
+        });
+      });
+
+      // 고민 리스트 항목 클릭 연동 (07번 클릭 시 SeSAC 필터링 및 이동 포함)
+      document.querySelectorAll(".concern-list li").forEach((item) => {
+        item.addEventListener("click", () => {
+          const action = item.getAttribute("data-action");
+          const filter = item.getAttribute("data-filter");
+
+          if (action === "consult") {
+            const consultSec = document.getElementById("consult-section");
+            if (consultSec) consultSec.scrollIntoView({ behavior: "smooth", block: "center" });
+          } else if (filter) {
+            applyCourseFilter(filter);
+            const listSec = document.getElementById("courses-list-section");
+            if (listSec) listSec.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      const topBtn = document.getElementById("scroll-top-btn");
+      if (topBtn) {
+        topBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+    }
+
+    // URL 해시(#course-card-2 등)로 직접 접속 시 해당 카드로 스크롤 및 강조
+    function checkHashAndFocusCard() {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith("#course-card-")) {
+        const idx = hash.replace("#course-card-", "");
+        setTimeout(() => {
+          focusCourseCardByIndex(idx);
+        }, 350);
+      }
     }
 
     // 구글 시트에서 데이터 불러오기
     async function loadCoursesFromSheet() {
-      renderOngoingCourses(sortCoursesByStartDate(FALLBACK_COURSES));
+      initInteractiveUI();
+      renderCourses(FALLBACK_COURSES);
       initOngoingSliderControls();
 
-      // 아직 웹앱 URL을 넣지 않은 경우 기본 설정과 8개 과정을 즉시 표시
       if (!SHEET_API_URL || SHEET_API_URL.includes("여기에_웹앱_URL")) {
         applySiteSettings(DEFAULT_SETTINGS, FALLBACK_COURSES);
-        renderCourses(FALLBACK_COURSES);
+        checkHashAndFocusCard();
         return;
       }
 
@@ -2692,16 +2497,17 @@ Html
         if (!response.ok) throw new Error("네트워크 응답 오류");
         const data = await response.json();
 
-        // 새 Apps Script 응답 구조 ({ settings, courses }) 및 이전 배열 구조 모두 호환
         const courses = Array.isArray(data) ? data : (data.courses || []);
         const settings = Array.isArray(data) ? {} : (data.settings || {});
 
         applySiteSettings(settings, courses);
         renderCourses(courses);
+        checkHashAndFocusCard();
       } catch (error) {
         console.error("구글 시트 연동 실패, 기본 데이터를 표시합니다:", error);
         applySiteSettings(DEFAULT_SETTINGS, FALLBACK_COURSES);
         renderCourses(FALLBACK_COURSES);
+        checkHashAndFocusCard();
       }
     }
 
