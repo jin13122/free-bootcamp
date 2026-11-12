@@ -70,7 +70,7 @@
       letter-spacing: -0.01em;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 92px;
+      padding-bottom: 80px;
     }
 
     .num {
@@ -973,88 +973,91 @@
       border-radius: 18px;
     }
 
-    /* 하단 고정 플로팅 상담 바 */
+    /* 하단 고정 플로팅 상담 바 (컴팩트 사이즈 & 뒷화면 비치는 반투명 스타일) */
     .floating-bar {
       position: fixed;
-      bottom: 18px;
+      bottom: 16px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 40;
-      width: calc(100% - 24px);
-      max-width: 480px;
-      background: rgba(20, 20, 19, 0.94);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      width: fit-content;
+      max-width: calc(100% - 24px);
+      background: rgba(20, 20, 19, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 999px;
-      padding: 8px 10px 8px 20px;
+      padding: 6px 8px 6px 16px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 10px;
-      box-shadow: 0 18px 38px rgba(20, 20, 19, 0.28);
+      box-shadow: 0 8px 24px rgba(20, 20, 19, 0.16);
     }
 
     .floating-bar-text {
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-weight: 800;
       color: #FFFFFF;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .floating-bar-text span {
-      color: #A5B4FC;
+      color: #C7D2FE;
     }
 
     .floating-bar-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       flex-shrink: 0;
     }
 
     .floating-consult-btn {
-      padding: 9px 16px;
+      padding: 6px 12px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #6366F1, #4F46E5);
+      background: rgba(79, 70, 229, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       color: #FFFFFF;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       text-decoration: none;
       white-space: nowrap;
-      transition: opacity 0.15s ease, transform 0.15s ease;
+      transition: background-color 0.15s ease, transform 0.15s ease;
     }
 
     .floating-consult-btn:hover {
-      opacity: 0.95;
+      background: rgba(67, 56, 202, 0.95);
       transform: scale(1.02);
     }
 
     .floating-top-btn {
-      width: 35px;
-      height: 35px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.16);
       color: #FFFFFF;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 13px;
       transition: all 0.15s ease;
     }
 
     .floating-top-btn:hover {
-      background: #FFFFFF;
+      background: rgba(255, 255, 255, 0.9);
       color: var(--text);
     }
 
     /* 링크 복사 완료 토스트 알림 */
     .copy-toast {
       position: fixed;
-      bottom: 84px;
+      bottom: 72px;
       left: 50%;
       transform: translateX(-50%) translateY(16px);
       background: var(--text);
@@ -1140,7 +1143,7 @@
     /* 모바일 화면 최적화 */
     @media (max-width: 640px) {
       body {
-        padding-bottom: 84px;
+        padding-bottom: 72px;
       }
       .header-inner {
         padding: 10px 14px;
@@ -1323,22 +1326,22 @@
         text-align: left;
       }
       .floating-bar {
-        bottom: 14px;
-        width: calc(100% - 20px);
-        padding: 7px 8px 7px 14px;
-        gap: 8px;
+        bottom: 12px;
+        max-width: calc(100% - 20px);
+        padding: 5px 6px 5px 12px;
+        gap: 7px;
       }
       .floating-bar-text {
-        font-size: 12.5px;
+        font-size: 11.5px;
       }
       .floating-consult-btn {
-        padding: 8px 13px;
-        font-size: 12px;
+        padding: 5px 10px;
+        font-size: 11px;
       }
       .floating-top-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
       }
     }
   </style>
