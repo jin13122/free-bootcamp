@@ -125,7 +125,7 @@
     }
 
     .header-inner {
-      max-width: 920px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 12px 24px;
       display: flex;
@@ -133,44 +133,16 @@
       gap: 10px;
     }
 
-    .header-top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand-title {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      transition: color 0.15s ease;
-    }
-
-    .brand-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      background: var(--accent);
-      transform: rotate(45deg);
-      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
-    }
-
-    .brand-title:hover {
-      color: var(--accent);
-    }
-
     .top-nav {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      gap: 8px;
       padding-bottom: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
 
     .top-nav::-webkit-scrollbar {
@@ -178,13 +150,13 @@
     }
 
     .top-nav-btn {
-      padding: 7px 13px;
+      padding: 8px 15px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text-secondary);
       font-family: inherit;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
       white-space: nowrap;
@@ -211,7 +183,7 @@
     main {
       position: relative;
       z-index: 10;
-      max-width: 920px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 40px 24px 64px;
     }
@@ -675,6 +647,7 @@
       font-size: 13.5px;
       font-weight: 800;
       cursor: pointer;
+      white-space: nowrap;
       transition: all 0.18s ease;
       display: inline-flex;
       align-items: center;
@@ -1095,7 +1068,7 @@
     }
 
     .footer-inner {
-      max-width: 920px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 36px 24px;
       display: flex;
@@ -1142,10 +1115,7 @@
         padding: 10px 16px;
       }
       .top-nav {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        justify-content: flex-start;
       }
       .editorial-box,
       .ongoing-section,
@@ -1193,12 +1163,6 @@
   <!-- 최상단 헤더 & 9개 전체 필터 연동 네비게이션 바 -->
   <header>
     <div class="header-inner">
-      <div class="header-top-row">
-        <a href="#top" class="brand-title">
-          <span class="brand-dot" aria-hidden="true"></span>
-          국비지원 부트캠프 모아보기
-        </a>
-      </div>
       <nav class="top-nav" aria-label="과정 카테고리 네비게이션">
         <button type="button" class="top-nav-btn active" data-nav-filter="all">전체 과정</button>
         <button type="button" class="top-nav-btn" data-nav-filter="free">✨ 전액무료 (자비부담 0원)</button>
