@@ -31,25 +31,28 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #F5F4F0;
+      --bg: #F3F5F2;
       --surface: #FFFFFF;
-      --surface-elevated: #F9F8F5;
-      --surface-subtle: #EFECE6;
-      --text: #141413;
-      --text-secondary: #3F3F46;
-      --text-muted: #71717A;
-      --border: #E4E2DD;
-      --border-hover: #4F46E5;
-      --accent: #4F46E5;
-      --accent-hover: #4338CA;
-      --accent-light: #6366F1;
-      --accent-soft: #EEF2FF;
-      --coral: #EA580C;
-      --coral-hover: #C2410C;
-      --emerald: #059669;
+      --surface-elevated: #F7F9F6;
+      --surface-subtle: #E9EFE7;
+      --text: #131A16;
+      --text-secondary: #37413C;
+      --text-muted: #64706A;
+      --border: #DCE3DA;
+      --border-hover: #059669;
+      --accent: #059669;
+      --accent-hover: #047857;
+      --accent-light: #10B981;
+      --accent-soft: #ECFDF5;
+      --forest-deep: #052E22;
+      --forest-dark: #064E3B;
+      --forest-mid: #065F46;
+      --coral: #0D9488;
+      --coral-hover: #0F766E;
+      --emerald: #047857;
       --amber: #D97706;
       --rose: #E11D48;
-      --violet: #7C3AED;
+      --violet: #0F766E;
     }
 
     * {
@@ -85,7 +88,7 @@
       inset: 0;
       z-index: 0;
       overflow: hidden;
-      background-image: radial-gradient(rgba(20, 20, 19, 0.055) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(19, 26, 22, 0.05) 1px, transparent 1px);
       background-size: 24px 24px;
     }
 
@@ -98,7 +101,7 @@
       width: 920px;
       height: 420px;
       border-radius: 9999px;
-      background: radial-gradient(circle, rgba(79, 70, 229, 0.10) 0%, rgba(234, 88, 12, 0.05) 60%, transparent 100%);
+      background: radial-gradient(circle, rgba(5, 150, 105, 0.11) 0%, rgba(16, 185, 129, 0.05) 60%, transparent 100%);
       filter: blur(90px);
     }
 
@@ -110,7 +113,7 @@
       width: 520px;
       height: 520px;
       border-radius: 9999px;
-      background: rgba(5, 150, 105, 0.07);
+      background: rgba(13, 148, 136, 0.07);
       filter: blur(110px);
     }
 
@@ -119,7 +122,7 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(245, 244, 240, 0.92);
+      background: rgba(243, 245, 242, 0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -176,7 +179,7 @@
       background: var(--accent);
       border-color: var(--accent);
       color: #FFFFFF;
-      box-shadow: 0 3px 10px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 3px 10px rgba(5, 150, 105, 0.25);
     }
 
     /* 메인 레이아웃 */
@@ -190,7 +193,7 @@
 
     /* 광고 유입자 이탈 방지용 최상단 핵심 혜택 요약 배너 */
     .hero-benefit-banner {
-      background: linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #4338CA 100%);
+      background: linear-gradient(135deg, #052E22 0%, #064E3B 58%, #047857 100%);
       border-radius: 22px;
       padding: 32px;
       margin-bottom: 32px;
@@ -198,7 +201,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
-      box-shadow: 0 16px 36px -12px rgba(49, 46, 129, 0.32);
+      box-shadow: 0 16px 36px -12px rgba(6, 78, 59, 0.32);
       position: relative;
       overflow: hidden;
     }
@@ -211,7 +214,7 @@
       width: 240px;
       height: 240px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(253, 224, 71, 0.18) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(167, 243, 208, 0.2) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -306,15 +309,15 @@
     }
 
     .hero-visual-icon.ic-gear {
-      background: rgba(99, 102, 241, 0.28);
-      color: #C7D2FE;
-      border: 1px solid rgba(199, 210, 254, 0.35);
+      background: rgba(45, 212, 191, 0.22);
+      color: #99F6E4;
+      border: 1px solid rgba(153, 246, 228, 0.35);
     }
 
     .hero-visual-icon.ic-job {
-      background: rgba(244, 63, 94, 0.22);
-      color: #FDA4AF;
-      border: 1px solid rgba(253, 164, 175, 0.35);
+      background: rgba(163, 230, 53, 0.22);
+      color: #D9F99D;
+      border: 1px solid rgba(217, 249, 157, 0.35);
     }
 
     .hero-visual-text {
@@ -528,9 +531,9 @@
 
     /* 개강일 경과 시 '추가모집중' 전용 스타일 */
     .dday-badge.extra {
-      background: #F3E8FF;
-      color: var(--violet);
-      border: 1px solid #DDD6FE;
+      background: #F0FDFA;
+      color: #0F766E;
+      border: 1px solid #99F6E4;
       animation: pulseExtra 2.2s infinite;
     }
 
@@ -540,8 +543,8 @@
     }
 
     @keyframes pulseExtra {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.22); }
-      50% { box-shadow: 0 0 0 5px rgba(124, 58, 237, 0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.22); }
+      50% { box-shadow: 0 0 0 5px rgba(15, 118, 110, 0); }
     }
 
     /* 고민 섹션 카드 */
@@ -574,7 +577,7 @@
 
     .accent-underline {
       color: var(--accent);
-      background: linear-gradient(180deg, transparent 62%, rgba(79, 70, 229, 0.16) 62%);
+      background: linear-gradient(180deg, transparent 62%, rgba(5, 150, 105, 0.18) 62%);
       padding: 0 4px;
       text-decoration: none;
     }
@@ -582,7 +585,7 @@
     .accent-bar {
       width: 64px;
       height: 5px;
-      background: linear-gradient(90deg, var(--accent), var(--coral));
+      background: linear-gradient(90deg, var(--forest-dark), var(--accent-light));
       border-radius: 9999px;
       margin: 20px auto 0;
     }
@@ -688,7 +691,7 @@
       border-color: var(--accent);
       transform: translateY(-4px);
       background: #FFFFFF;
-      box-shadow: 0 14px 28px -10px rgba(79, 70, 229, 0.15);
+      box-shadow: 0 14px 28px -10px rgba(5, 150, 105, 0.16);
     }
 
     .ongoing-card-top {
@@ -818,7 +821,7 @@
       font-weight: 800;
       color: var(--accent);
       background: #FFFFFF;
-      border: 1px solid rgba(79, 70, 229, 0.25);
+      border: 1px solid rgba(5, 150, 105, 0.28);
       padding: 5px 12px;
       border-radius: 999px;
       white-space: nowrap;
@@ -835,11 +838,11 @@
 
     /* 상담신청 섹션 (좌우 분할 레이아웃 & 인풋헤븐 폼) */
     .consult-box {
-      background: linear-gradient(135deg, #1E1B4B 0%, #312E81 55%, #4338CA 100%);
+      background: linear-gradient(135deg, #052E22 0%, #064E3B 55%, #047857 100%);
       border-radius: 24px;
       padding: 44px;
       margin-bottom: 68px;
-      box-shadow: 0 22px 44px -15px rgba(49, 46, 129, 0.35);
+      box-shadow: 0 22px 44px -15px rgba(6, 78, 59, 0.35);
       display: grid;
       grid-template-columns: 1fr 1.15fr;
       gap: 40px;
@@ -856,7 +859,7 @@
       width: 340px;
       height: 340px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.28) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -949,10 +952,10 @@
     }
 
     .consult-title-highlight {
-      color: #C7D2FE;
+      color: #A7F3D0;
       text-decoration: underline;
       text-underline-offset: 6px;
-      text-decoration-color: rgba(199, 210, 254, 0.5);
+      text-decoration-color: rgba(167, 243, 208, 0.5);
     }
 
     .consult-subtitle {
@@ -1047,12 +1050,12 @@
     .form-textarea:focus {
       border-color: var(--accent);
       background: #FFFFFF;
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.14);
     }
 
     .form-input[readonly] {
       background: var(--accent-soft);
-      border-color: #C7D2FE;
+      border-color: #A7F3D0;
       color: var(--accent-hover);
       font-weight: 800;
       cursor: default;
@@ -1121,7 +1124,7 @@
       font-size: 15.5px;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.45);
+      box-shadow: 0 8px 20px -4px rgba(5, 150, 105, 0.42);
       transition: all 0.18s ease;
     }
 
@@ -1361,10 +1364,10 @@
     }
 
     .filter-tab-btn.active {
-      background: var(--text);
-      border-color: var(--text);
+      background: var(--forest-dark);
+      border-color: var(--forest-dark);
       color: #FFFFFF;
-      box-shadow: 0 6px 16px rgba(20, 20, 19, 0.18);
+      box-shadow: 0 6px 16px rgba(6, 78, 59, 0.22);
     }
 
     .filter-status-row {
@@ -1392,7 +1395,7 @@
 
     .search-bar-row:focus-within {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.14);
     }
 
     .search-bar-icon {
@@ -1462,13 +1465,13 @@
     }
 
     .course-card:hover {
-      border-color: #CBD5E1;
-      box-shadow: 0 18px 38px -12px rgba(20, 20, 19, 0.10);
+      border-color: #A7F3D0;
+      box-shadow: 0 18px 38px -12px rgba(6, 78, 59, 0.10);
     }
 
     .course-card.is-highlighted {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25), 0 20px 40px -10px rgba(79, 70, 229, 0.2);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25), 0 20px 40px -10px rgba(5, 150, 105, 0.2);
     }
 
     /* 카드 상단 메타 및 혜택 태그 */
@@ -1525,15 +1528,15 @@
     }
 
     .benefit-tag.tag-nocard {
-      background: #EFF6FF;
-      color: #1D4ED8;
-      border: 1px solid #BFDBFE;
+      background: #F0FDF4;
+      color: #15803D;
+      border: 1px solid #BBF7D0;
     }
 
     .benefit-tag.tag-dorm {
-      background: #FAF5FF;
-      color: #6D28D9;
-      border: 1px solid #E9D5FF;
+      background: #F0FDFA;
+      color: #0F766E;
+      border: 1px solid #99F6E4;
     }
 
     .benefit-tag.tag-online {
@@ -1581,8 +1584,8 @@
 
     .spec-row.spec-full {
       grid-column: 1 / -1;
-      background: #F4F3FF;
-      border-color: #E0E7FF;
+      background: #ECFDF5;
+      border-color: #A7F3D0;
     }
 
     .spec-row dt {
@@ -1717,31 +1720,31 @@
       word-break: keep-all;
     }
 
-    /* 홈페이지(커리큘럼) 버튼 */
+    /* 홈페이지(커리큘럼) 버튼 - 딥 포레스트 그린 */
     .detail-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       padding: 14px 20px;
-      background-color: #312E81;
-      border: 1px solid #312E81;
+      background-color: var(--forest-mid);
+      border: 1px solid var(--forest-mid);
       color: #FFFFFF;
       font-size: 14px;
       font-weight: 800;
       border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(49, 46, 129, 0.22);
+      box-shadow: 0 4px 12px rgba(6, 95, 70, 0.22);
       transition: all 0.15s ease;
     }
 
     .detail-btn:hover {
-      background-color: #1E1B4B;
-      border-color: #1E1B4B;
+      background-color: var(--forest-dark);
+      border-color: var(--forest-dark);
       transform: translateY(-1px);
     }
 
-    /* 지원접수 버튼 */
+    /* 지원접수 버튼 - 에메랄드 그린 */
     .apply-btn {
       display: inline-flex;
       align-items: center;
@@ -1754,7 +1757,7 @@
       font-weight: 800;
       border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
       transition: all 0.15s ease;
     }
 
@@ -1832,7 +1835,7 @@
     }
 
     .floating-bar-text span {
-      color: #C7D2FE;
+      color: #6EE7B7;
     }
 
     .floating-bar-actions {
@@ -1845,7 +1848,7 @@
     .floating-consult-btn {
       padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(79, 70, 229, 0.82);
+      background: rgba(5, 150, 105, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #FFFFFF;
       font-size: 12px;
@@ -1856,7 +1859,7 @@
     }
 
     .floating-consult-btn:hover {
-      background: rgba(67, 56, 202, 0.95);
+      background: rgba(4, 120, 87, 0.98);
       transform: scale(1.02);
     }
 
@@ -1886,7 +1889,7 @@
       bottom: 72px;
       left: 50%;
       transform: translateX(-50%) translateY(16px);
-      background: var(--text);
+      background: var(--forest-dark);
       color: #FFFFFF;
       font-size: 13.5px;
       font-weight: 800;
@@ -1908,7 +1911,7 @@
     footer {
       position: relative;
       z-index: 10;
-      background: #EAE8E1;
+      background: #E5ECE3;
       border-top: 1px solid var(--border);
       margin-top: 64px;
     }
