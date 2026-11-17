@@ -373,115 +373,6 @@
       transform: translateY(-2px);
     }
 
-    /* 3단계 진행 절차 인포그래픽 섹션 */
-    .process-visual-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 36px 40px;
-      margin-bottom: 48px;
-      box-shadow: 0 12px 32px -12px rgba(20, 20, 19, 0.05);
-    }
-
-    .process-header {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .process-sub-badge {
-      display: inline-block;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 800;
-      padding: 4px 12px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-    }
-
-    .process-title {
-      font-size: clamp(1.35rem, 2.6vw, 1.85rem);
-      font-weight: 900;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      word-break: keep-all;
-    }
-
-    .process-steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      position: relative;
-    }
-
-    .process-step-card {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 24px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 12px;
-      position: relative;
-      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .process-step-card:hover {
-      border-color: var(--accent);
-      background: #FFFFFF;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px -10px rgba(79, 70, 229, 0.14);
-    }
-
-    .process-step-icon-wrap {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .process-step-num {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      background: var(--accent);
-      color: #FFFFFF;
-      font-size: 10.5px;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 999px;
-      line-height: 1.2;
-    }
-
-    .process-step-body {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .process-step-name {
-      font-size: 16px;
-      font-weight: 900;
-      color: var(--text);
-      word-break: keep-all;
-    }
-
-    .process-step-desc {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      line-height: 1.5;
-      word-break: keep-all;
-    }
-
     /* 스크롤 애니메이션 */
     .scroll-reveal {
       opacity: 0;
@@ -590,7 +481,7 @@
       margin: 20px auto 0;
     }
 
-    /* 상단 진행중인 부트캠프 요약 슬라이드 영역 */
+    /* 상단 진행중인 부트캠프 요약 슬라이드 & 하단 리스트 영역 */
     .ongoing-section {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -751,6 +642,139 @@
       color: var(--text);
       font-weight: 700;
       text-align: right;
+    }
+
+    /* ★ 진행중인 부트캠프 하단 한눈에 보는 리스트 영역 (개강일 / 과정명 / 교육장소) ★ */
+    .ongoing-quick-list-wrap {
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .ongoing-quick-list-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ongoing-quick-list-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ongoing-quick-list-badge {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid #A7F3D0;
+      padding: 2px 9px;
+      border-radius: 999px;
+    }
+
+    .ongoing-quick-list-hint {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .ongoing-quick-list-head {
+      display: grid;
+      grid-template-columns: 165px minmax(0, 1fr) 210px;
+      gap: 16px;
+      padding: 10px 18px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 12px 12px 0 0;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .ongoing-quick-list {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 14px 14px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .ongoing-quick-item {
+      display: grid;
+      grid-template-columns: 165px minmax(0, 1fr) 210px;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      background: var(--surface);
+      cursor: pointer;
+      transition: background-color 0.16s ease;
+    }
+
+    .ongoing-quick-item:last-child {
+      border-bottom: none;
+    }
+
+    .ongoing-quick-item:hover {
+      background: var(--accent-soft);
+    }
+
+    .ongoing-quick-date {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent-hover);
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 8px;
+      text-align: left;
+      white-space: nowrap;
+      width: fit-content;
+    }
+
+    .ongoing-quick-item:hover .ongoing-quick-date {
+      background: #FFFFFF;
+      border-color: #A7F3D0;
+    }
+
+    .ongoing-quick-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.45;
+      text-align: left;
+      word-break: keep-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+
+    .ongoing-quick-item:hover .ongoing-quick-name {
+      color: var(--accent-hover);
+    }
+
+    .ongoing-quick-loc {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* 인터랙티브 고민 리스트 */
@@ -973,16 +997,6 @@
       box-shadow: 0 18px 36px rgba(10, 10, 25, 0.22);
       position: relative;
       z-index: 1;
-    }
-
-    .consult-form-title {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--text);
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-      letter-spacing: -0.02em;
     }
 
     .consult-form {
@@ -1979,16 +1993,6 @@
       .hero-cta-primary {
         width: 100%;
       }
-      .process-steps-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .process-step-card {
-        flex-direction: row;
-        text-align: left;
-        padding: 18px 20px;
-        gap: 16px;
-      }
     }
 
     @media (max-width: 768px) {
@@ -1997,6 +2001,16 @@
       }
       .spec-list {
         grid-template-columns: 1fr;
+      }
+      .ongoing-quick-list-head {
+        grid-template-columns: 145px minmax(0, 1fr) 150px;
+        gap: 10px;
+        padding: 10px 14px;
+      }
+      .ongoing-quick-item {
+        grid-template-columns: 145px minmax(0, 1fr) 150px;
+        gap: 10px;
+        padding: 12px 14px;
       }
     }
 
@@ -2023,8 +2037,7 @@
       .ongoing-section,
       .course-card,
       .consult-box,
-      .faq-box,
-      .process-visual-box {
+      .faq-box {
         padding: 22px 18px;
         border-radius: 18px;
         margin-bottom: 28px;
@@ -2057,24 +2070,6 @@
       }
       .hero-visual-value {
         font-size: 13px;
-      }
-      .process-header {
-        margin-bottom: 18px;
-      }
-      .process-step-card {
-        padding: 15px 14px;
-        gap: 14px;
-      }
-      .process-step-icon-wrap {
-        width: 48px;
-        height: 48px;
-        border-radius: 13px;
-      }
-      .process-step-name {
-        font-size: 14.5px;
-      }
-      .process-step-desc {
-        font-size: 12.5px;
       }
       /* 모바일 iOS 사파리 입력창 터치 시 화면 강제 확대 방지 (16px 필수) */
       .form-input,
@@ -2114,6 +2109,32 @@
       .ongoing-card {
         min-height: 185px;
         padding: 18px;
+      }
+      /* 모바일 하단 리스트 뷰 최적화 */
+      .ongoing-quick-list-head {
+        display: none;
+      }
+      .ongoing-quick-list {
+        border-top: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      .ongoing-quick-item {
+        grid-template-columns: 1fr;
+        justify-items: start;
+        text-align: left;
+        gap: 6px;
+        padding: 14px;
+      }
+      .ongoing-quick-date {
+        font-size: 11.5px;
+        padding: 3px 8px;
+      }
+      .ongoing-quick-loc {
+        font-size: 12px;
+      }
+      .ongoing-quick-name {
+        font-size: 13.5px;
+        -webkit-line-clamp: 2;
       }
       .concern-guide {
         font-size: 12.5px;
@@ -2172,10 +2193,6 @@
       .consult-right {
         padding: 22px 16px;
         border-radius: 16px;
-      }
-      .consult-form-title {
-        font-size: 18px;
-        margin-bottom: 16px;
       }
       .form-row-2col {
         grid-template-columns: 1fr;
@@ -2370,7 +2387,7 @@
       </div>
     </section>
 
-    <!-- 상단 진행중인 부트캠프 요약 슬라이드 영역 -->
+    <!-- 상단 진행중인 부트캠프 요약 슬라이드 & 하단 전체 리스트 영역 -->
     <div class="scroll-reveal is-visible">
       <section id="ongoing-bootcamp-section" class="ongoing-section" aria-label="진행중인 부트캠프">
         <div class="ongoing-header">
@@ -2492,6 +2509,64 @@
                 <span class="ongoing-location-label">교육장소</span>
                 <span class="ongoing-location-value">온라인수업</span>
               </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- ★ 진행중인 부트캠프 하단 리스트 (구글 스프레드시트 실시간 연동 & 개강일순 정렬) ★ -->
+        <div class="ongoing-quick-list-wrap" aria-label="진행중인 부트캠프 전체 리스트">
+          <div class="ongoing-quick-list-bar">
+            <div class="ongoing-quick-list-title">
+              <span>📋 한눈에 보는 개강일순 리스트</span>
+              <span id="ongoing-quick-list-count" class="ongoing-quick-list-badge num">8개 과정</span>
+            </div>
+            <span class="ongoing-quick-list-hint">과정을 클릭하면 아래 상세 내용으로 바로 이동합니다.</span>
+          </div>
+          <div class="ongoing-quick-list-head" aria-hidden="true">
+            <span>개강일</span>
+            <span>과정명</span>
+            <span>교육장소</span>
+          </div>
+          <div id="ongoing-quick-list" class="ongoing-quick-list">
+            <a href="#course-card-0" class="ongoing-quick-item" data-course-index="0">
+              <span class="ongoing-quick-date num">2026년 11월 09일</span>
+              <span class="ongoing-quick-name">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)</span>
+              <span class="ongoing-quick-loc">서울 신림(당곡역)</span>
+            </a>
+            <a href="#course-card-1" class="ongoing-quick-item" data-course-index="1">
+              <span class="ongoing-quick-date num">2026년 11월 11일</span>
+              <span class="ongoing-quick-name">AI 데이터센터 인프라 엔지니어 양성과정(1기수)</span>
+              <span class="ongoing-quick-loc">서울 강남(강남역)</span>
+            </a>
+            <a href="#course-card-2" class="ongoing-quick-item" data-course-index="2">
+              <span class="ongoing-quick-date num">2026년 12월 07일</span>
+              <span class="ongoing-quick-name">Enterprise AI Cloud MSP 엔지니어 양성과정</span>
+              <span class="ongoing-quick-loc">서울 영등포(문래역)</span>
+            </a>
+            <a href="#course-card-3" class="ongoing-quick-item" data-course-index="3">
+              <span class="ongoing-quick-date num">2026년 12월 10일</span>
+              <span class="ongoing-quick-name">SM유니버스 생성형 AI코딩 기반 엔터테인먼트 플랫폼 엔지니어 양성과정(15기수)</span>
+              <span class="ongoing-quick-loc">서울 금천구(가산디지털단지역)</span>
+            </a>
+            <a href="#course-card-4" class="ongoing-quick-item" data-course-index="4">
+              <span class="ongoing-quick-date num">2026년 12월 21일</span>
+              <span class="ongoing-quick-name">현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(8기수)</span>
+              <span class="ongoing-quick-loc">서울 신림(당곡역)</span>
+            </a>
+            <a href="#course-card-5" class="ongoing-quick-item" data-course-index="5">
+              <span class="ongoing-quick-date num">2026년 12월 21일</span>
+              <span class="ongoing-quick-name">AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</span>
+              <span class="ongoing-quick-loc">경기도 안산시(4호선 중앙역)</span>
+            </a>
+            <a href="#course-card-6" class="ongoing-quick-item" data-course-index="6">
+              <span class="ongoing-quick-date num">2026년 12월 29일</span>
+              <span class="ongoing-quick-name">AI 데이터센터 인프라 엔지니어 양성과정(2기수)</span>
+              <span class="ongoing-quick-loc">서울 강남(강남역)</span>
+            </a>
+            <a href="#course-card-7" class="ongoing-quick-item" data-course-index="7">
+              <span class="ongoing-quick-date num">2027년 01월 12일</span>
+              <span class="ongoing-quick-name">클라우드 인프라 과정(7기수)</span>
+              <span class="ongoing-quick-loc">온라인수업</span>
             </a>
           </div>
         </div>
@@ -2863,7 +2938,6 @@
           <div class="course-footer">
             <a href="https://k-edu-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(커리큘럼)</a>
             <a href="https://naver.me/5imEQFuO" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
-            <button type="button" class="inquire-course-btn" data-inquire-title="현업에서 바로 통하는 자바 풀스택 &amp; 생성형AI 서비스개발 기업 프로젝트 완성(7기수)">💬 이 과정 문의</button>
           </div>
         </article>
       </div>
@@ -2956,6 +3030,29 @@
           <div class="course-footer">
             <a href="https://k-edu-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(커리큘럼)</a>
             <a href="https://naver.me/5imEQFuO" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="scroll-reveal is-visible course-card-wrapper" data-filter-keys="all ai programming offline">
+        <article id="course-card-5" class="course-card">
+          <div class="course-meta num">
+            <span class="start-badge">2026년 12월 21일 개강</span>
+            <span>원룸형기숙사 · K-디지털트레이닝 · 오프라인 대면수업</span>
+          </div>
+          <h3 class="course-title">AI사물인터넷 MCU기반 (STM32, ESP32) 임베디드 펌웨어 전문가 양성 과정</h3>
+          <dl class="spec-list">
+            <div class="spec-row"><dt>주관기관</dt><dd class="strong-white">한국직업능력교육원 안산캠퍼스</dd></div>
+            <div class="spec-row"><dt>개강일</dt><dd class="num strong-accent">2026년 12월 21일</dd></div>
+            <div class="spec-row"><dt>교육장소</dt><dd>경기도 안산시(4호선 중앙역)</dd></div>
+            <div class="spec-row"><dt>교육방식</dt><dd>오프라인 대면수업(기숙사제공)</dd></div>
+            <div class="spec-row"><dt>교육유형</dt><dd>K-디지털트레이닝</dd></div>
+            <div class="spec-row"><dt>교육비용</dt><dd class="num">9,151,250원</dd></div>
+            <div class="spec-row spec-full"><dt>자비부담금</dt><dd class="num strong-white">400,000원</dd></div>
+          </dl>
+          <div class="course-footer">
+            <a href="https://ai-iot-embedded-jh.vercel.app/" target="_blank" rel="noopener noreferrer" class="detail-btn">홈페이지(커리큘럼)</a>
+            <a href="https://naver.me/Fuzw9Srr" target="_blank" rel="noopener noreferrer" class="apply-btn">지원접수</a>
           </div>
         </article>
       </div>
@@ -3333,6 +3430,20 @@
       return 99999999;
     }
 
+    // 개강일 표시 포맷 정리 함수
+    function formatCleanStartDate(dateStr) {
+      if (!dateStr) return "";
+      const raw = String(dateStr).trim();
+      const match = raw.match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/);
+      if (match) {
+        const year = match[1];
+        const month = match[2].padStart(2, "0");
+        const day = match[3].padStart(2, "0");
+        return `${year}년 ${month}월 ${day}일`;
+      }
+      return raw.replace(/\s*개강$/, "");
+    }
+
     // 실시간 D-Day 배지 HTML 생성 (개강일이 지났으면 '추가모집중' 자동 표시)
     function getDdayBadgeHtml(dateStr) {
       if (!dateStr) return "";
@@ -3500,13 +3611,18 @@
     let ongoingDidDrag = false;
     let ongoingTouchResumeTimer = null;
 
-    // 특정 과정 카드로 스크롤 및 하이라이트
+    // 특정 과정 카드로 스크롤 및 하이라이트 (필터/검색어로 숨겨진 경우 자동 해제 후 이동)
     function focusCourseCardByIndex(idx) {
       const targetCard = document.getElementById(`course-card-${idx}`);
       if (!targetCard) return;
 
       const wrapper = targetCard.closest(".course-card-wrapper");
       if (wrapper && wrapper.classList.contains("is-hidden")) {
+        currentSearchQuery = "";
+        const searchInput = document.getElementById("course-search-input");
+        const searchClear = document.getElementById("course-search-clear");
+        if (searchInput) searchInput.value = "";
+        if (searchClear) searchClear.classList.remove("visible");
         applyCourseFilter("all");
       }
 
@@ -3531,6 +3647,22 @@
             return;
           }
           const idx = card.getAttribute("data-course-index");
+          if (idx !== null) {
+            e.preventDefault();
+            focusCourseCardByIndex(idx);
+          }
+        });
+      });
+    }
+
+    // ★ 진행중인 부트캠프 하단 리스트 클릭 시 상세 과정 카드로 이동 바인딩 ★
+    function bindOngoingQuickListClicks() {
+      const quickListContainer = document.getElementById("ongoing-quick-list");
+      if (!quickListContainer) return;
+
+      quickListContainer.querySelectorAll(".ongoing-quick-item").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          const idx = item.getAttribute("data-course-index");
           if (idx !== null) {
             e.preventDefault();
             focusCourseCardByIndex(idx);
@@ -3672,8 +3804,8 @@
         const originalIndex = loopIdx % sortedCourses.length;
         const isClone = loopIdx >= sortedCourses.length;
         const subject = escapeHtml(course["과정명"] || course["과목명"] || "");
-        const rawStartDate = escapeHtml(course["개강일"] || "");
-        const startDateText = rawStartDate.includes("개강") ? rawStartDate : `${rawStartDate} 개강`;
+        const cleanDate = escapeHtml(formatCleanStartDate(course["개강일"] || ""));
+        const startDateText = cleanDate ? `${cleanDate} 개강` : "";
         const location = escapeHtml(course["교육장소"] || "");
         const ddayBadge = getDdayBadgeHtml(course["개강일"]);
 
@@ -3703,6 +3835,46 @@
       });
 
       bindOngoingCardClicks();
+    }
+
+    // ★ 진행중인 부트캠프 하단 리스트(개강일 / 과정명 / 교육장소) 렌더링 (스프레드시트 연동 & 개강일순) ★
+    function renderOngoingQuickList(sortedCourses) {
+      const quickListContainer = document.getElementById("ongoing-quick-list");
+      const quickListCount = document.getElementById("ongoing-quick-list-count");
+      if (!quickListContainer) return;
+
+      quickListContainer.innerHTML = "";
+
+      if (!sortedCourses || sortedCourses.length === 0) {
+        if (quickListCount) quickListCount.textContent = "0개 과정";
+        quickListContainer.innerHTML = '<div class="status-message" style="border:none; border-radius:0;">현재 진행중인 부트캠프가 없습니다.</div>';
+        return;
+      }
+
+      if (quickListCount) {
+        quickListCount.textContent = `${sortedCourses.length}개 과정`;
+      }
+
+      sortedCourses.forEach((course, idx) => {
+        const cleanDate = escapeHtml(formatCleanStartDate(course["개강일"] || ""));
+        const subject = escapeHtml(course["과정명"] || course["과목명"] || "");
+        const location = escapeHtml(course["교육장소"] || "");
+
+        const row = document.createElement("a");
+        row.href = `#course-card-${idx}`;
+        row.className = "ongoing-quick-item";
+        row.setAttribute("data-course-index", String(idx));
+
+        row.innerHTML = `
+          <span class="ongoing-quick-date num">${cleanDate}</span>
+          <span class="ongoing-quick-name">${subject}</span>
+          <span class="ongoing-quick-loc">${location}</span>
+        `;
+
+        quickListContainer.appendChild(row);
+      });
+
+      bindOngoingQuickListClicks();
     }
 
     // 조건별 필터 적용 함수 (상단 네비게이션 바 & 과정 목록 필터 탭 & 실시간 검색어 동시 반영)
@@ -3782,27 +3954,34 @@
       }
     }
 
-    // 상단 진행중인 부트캠프 & 하단 모집 과정 목록 렌더링
+    // 상단 진행중인 부트캠프(슬라이드 + 리스트) & 하단 모집 과정 상세 목록 렌더링
     function renderCourses(courses) {
       const container = document.getElementById("course-list-container");
       container.innerHTML = "";
 
       if (!courses || courses.length === 0) {
         renderOngoingCourses([]);
+        renderOngoingQuickList([]);
         container.innerHTML = '<div class="status-message">현재 모집 중인 과정이 없습니다.</div>';
         const countEl = document.getElementById("visible-course-count");
         if (countEl) countEl.textContent = "0";
         return;
       }
 
+      // 개강일 빠른순 자동 정렬
       const sortedCourses = sortCoursesByStartDate(courses);
-      renderOngoingCourses(sortedCourses);
 
+      // 1) 상단 슬라이드 업데이트
+      renderOngoingCourses(sortedCourses);
+      // 2) 진행중인 부트캠프 하단 리스트(개강일/과정명/교육장소) 업데이트
+      renderOngoingQuickList(sortedCourses);
+
+      // 3) 하단 상세 카드 업데이트
       sortedCourses.forEach((course, index) => {
         const orgLabel = course["기관명칭"] ? escapeHtml(course["기관명칭"]) : "주관기관";
         const orgName = escapeHtml(course["기관명"]);
         const title = escapeHtml(course["과정명"] || course["과목명"]);
-        const startDate = escapeHtml(course["개강일"]);
+        const startDate = escapeHtml(formatCleanStartDate(course["개강일"]));
         const location = escapeHtml(course["교육장소"]);
         const method = escapeHtml(course["교육방식"]);
         const type = escapeHtml(course["교육유형"]);
@@ -3978,17 +4157,14 @@
           e.preventDefault();
 
           const formData = new FormData(consultForm);
-          // InputHaven 대시보드 호환 및 항목 명확화를 위해 이름/문의내용 별칭 함께 포함
           formData.set("이름", formData.get("name") || "");
           formData.set("문의내용", formData.get("message") || "");
 
-          // 1. 즉시 성공 처리 (Optimistic UI): 서버 응답 대기 없이 즉시 완료 화면 표시
           if (formWrapper && successView) {
             formWrapper.style.display = "none";
             successView.classList.add("active");
           }
 
-          // 2. 백그라운드 전송 & 전송 보장 (keepalive: true)
           fetch(consultForm.action, {
             method: "POST",
             body: formData,
@@ -4025,7 +4201,7 @@
       }
     }
 
-    // 구글 시트에서 데이터 불러오기
+    // 구글 시트에서 데이터 불러오기 (슬라이드 + 하단 리스트 + 상세 카드 모두 실시간 연동)
     async function loadCoursesFromSheet() {
       initInteractiveUI();
       renderCourses(FALLBACK_COURSES);
