@@ -644,7 +644,7 @@
       text-align: right;
     }
 
-    /* ★ 진행중인 부트캠프 하단 한눈에 보는 리스트 영역 (개강일 / 과정명 / 교육장소) ★ */
+    /* ★ 진행중인 부트캠프 하단 한눈에 보는 리스트 영역 (개강일 / 부트캠프명 / 교육장소) ★ */
     .ongoing-quick-list-wrap {
       margin-top: 26px;
       padding-top: 24px;
@@ -1348,7 +1348,7 @@
 
     .filter-tabs {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       gap: 6px;
       justify-content: center;
     }
@@ -1563,6 +1563,12 @@
       background: var(--surface-subtle);
       color: var(--text-secondary);
       border: 1px solid var(--border);
+    }
+
+    .benefit-tag.tag-sandaeteuk {
+      background: #065F46;
+      color: #FFFFFF;
+      border: 1px solid #047857;
     }
 
     .course-title {
@@ -2290,15 +2296,17 @@
 
   <div class="ambient-glow" aria-hidden="true"></div>
 
-  <!-- 최상단 헤더 & 9개 전체 필터 연동 네비게이션 바 -->
+  <!-- 최상단 헤더 & 전체 필터 연동 네비게이션 바 -->
   <header>
     <div class="header-inner">
       <nav class="top-nav" aria-label="과정 카테고리 네비게이션">
         <button type="button" class="top-nav-btn active" data-nav-filter="all">전체 과정</button>
-        <button type="button" class="top-nav-btn" data-nav-filter="free">✨ 전액무료 (자비부담 0원)</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="free">✨ 전액무료</button>
         <button type="button" class="top-nav-btn" data-nav-filter="ai">🤖 AI</button>
         <button type="button" class="top-nav-btn" data-nav-filter="cloud">☁️ 클라우드</button>
-        <button type="button" class="top-nav-btn" data-nav-filter="programming">💻 프로그래밍</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="programming">💻 개발자</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="marketing">📣 마케팅</button>
+        <button type="button" class="top-nav-btn" data-nav-filter="design">🎨 디자인</button>
         <button type="button" class="top-nav-btn" data-nav-filter="offline">📍 대면교육</button>
         <button type="button" class="top-nav-btn" data-nav-filter="online">🏠 온라인교육</button>
         <button type="button" class="top-nav-btn" data-nav-filter="sesac">🌱 SeSAC</button>
@@ -2524,7 +2532,7 @@
           </div>
           <div class="ongoing-quick-list-head" aria-hidden="true">
             <span>개강일</span>
-            <span>과정명</span>
+            <span>부트캠프명</span>
             <span>교육장소</span>
           </div>
           <div id="ongoing-quick-list" class="ongoing-quick-list">
@@ -2901,10 +2909,12 @@
         </div>
         <div class="filter-tabs" role="tablist" aria-label="과정 조건별 필터">
           <button type="button" class="filter-tab-btn active" data-filter-key="all">전체 과정</button>
-          <button type="button" class="filter-tab-btn" data-filter-key="free">✨ 전액무료 (자비부담 0원)</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="free">✨ 전액무료</button>
           <button type="button" class="filter-tab-btn" data-filter-key="ai">🤖 AI</button>
           <button type="button" class="filter-tab-btn" data-filter-key="cloud">☁️ 클라우드</button>
-          <button type="button" class="filter-tab-btn" data-filter-key="programming">💻 프로그래밍</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="programming">💻 개발자</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="marketing">📣 마케팅</button>
+          <button type="button" class="filter-tab-btn" data-filter-key="design">🎨 디자인</button>
           <button type="button" class="filter-tab-btn" data-filter-key="offline">📍 대면교육</button>
           <button type="button" class="filter-tab-btn" data-filter-key="online">🏠 온라인교육</button>
           <button type="button" class="filter-tab-btn" data-filter-key="sesac">🌱 SeSAC</button>
@@ -3471,7 +3481,7 @@
       }
     }
 
-    // ★ 구글 스프레드시트 데이터 기반 9개 필터(SeSAC, AI캠퍼스 포함) & 혜택 태그 자동 분류 ★
+    // ★ 구글 스프레드시트 데이터 기반 필터(전액무료, AI, 클라우드, 개발자, 마케팅, 디자인, 대면, 온라인, SeSAC, AI캠퍼스) & 혜택 태그 자동 분류 ★
     function analyzeCourseFeatures(course) {
       const org = String(course["기관명"] || "");
       const title = String(course["과정명"] || course["과목명"] || "");
@@ -3492,19 +3502,24 @@
       const isAi = /AI|인공지능|생성형|머신러닝|딥러닝|LLM|데이터/i.test(subjectAndType);
       // 3) 클라우드 판별
       const isCloud = /클라우드|Cloud|MSP|인프라|데이터센터|AWS|Azure|쿠버네티스|Kubernetes|데브옵스|DevOps|서버|네트워크/i.test(subjectAndType);
-      // 4) 프로그래밍 판별
+      // 4) 개발자(프로그래밍) 판별
       const isProgramming = /프로그래밍|개발|코딩|자바|Java|풀스택|백엔드|프론트엔드|파이썬|Python|C언어|C\+\+|임베디드|MCU|펌웨어|STM32|ESP32|사물인터넷|IoT|웹|앱|소프트웨어|플랫폼/i.test(subjectAndType);
-      // 5) 온라인교육 판별
+      // 5) 마케팅 판별 (과정 제목 기준)
+      const isMarketing = /마케팅|marketing/i.test(title);
+      // 6) 디자인 판별 (과정 제목 기준)
+      const isDesign = /디자인|design/i.test(title);
+      // 7) 온라인교육 판별
       const isOnline = /온라인|비대면|원격|화상|재택|줌|Zoom/i.test(deliveryText);
-      // 6) 대면교육 판별
+      // 8) 대면교육 판별
       const isOffline = /오프라인|대면|집체|출석|기숙사/i.test(deliveryWithoutNonFace) || !isOnline;
-      // 7) SeSAC 판별 (교육유형 및 상단요약 기준)
+      // 9) SeSAC 판별 (교육유형 및 상단요약 기준)
       const isSesac = /SeSAC|새싹/i.test(`${type} ${summary}`);
-      // 8) AI캠퍼스 판별 (교육유형 및 상단요약 기준)
+      // 10) AI캠퍼스 판별 (교육유형 및 상단요약 기준)
       const isAiCampus = /AI캠퍼스|AI 캠퍼스/i.test(`${type} ${summary}`);
 
       const isNoCard = combined.includes("미사용");
       const isDorm = combined.includes("기숙사");
+      const isSandaeteuk = /산업구조변화대응|산대특|특화훈련/.test(`${type} ${summary}`);
       const isKdt = combined.includes("K-디지털") || combined.includes("AI캠퍼스");
 
       const filterKeys = ["all"];
@@ -3512,12 +3527,15 @@
       if (isAi) filterKeys.push("ai");
       if (isCloud) filterKeys.push("cloud");
       if (isProgramming) filterKeys.push("programming");
+      if (isMarketing) filterKeys.push("marketing");
+      if (isDesign) filterKeys.push("design");
       if (isOffline) filterKeys.push("offline");
       if (isOnline) filterKeys.push("online");
       if (isSesac) filterKeys.push("sesac");
       if (isAiCampus) filterKeys.push("aicampus");
 
       const tagsHtml = [];
+      if (isSandaeteuk) tagsHtml.push(`<span class="benefit-tag tag-sandaeteuk">🚩 산대특</span>`);
       if (isFree) tagsHtml.push(`<span class="benefit-tag tag-free">✨ 자비부담 0원 (전액무료)</span>`);
       if (isNoCard) tagsHtml.push(`<span class="benefit-tag tag-nocard">💳 내일배움카드 미사용</span>`);
       if (isDorm) tagsHtml.push(`<span class="benefit-tag tag-dorm">🏠 원룸형 기숙사 제공</span>`);
@@ -3529,6 +3547,28 @@
         filterKeys: filterKeys.join(" "),
         tagsHtml: tagsHtml.join("")
       };
+    }
+
+    // 시트 열 이름 공백/표기 차이를 유연하게 매칭하여 값 추출
+    function getCourseField(course, candidateKeys) {
+      if (!course || typeof course !== "object") return "";
+      for (const key of candidateKeys) {
+        const val = course[key];
+        if (val !== undefined && val !== null && String(val).trim() !== "") {
+          return String(val).trim();
+        }
+      }
+      const normalizedCandidates = candidateKeys.map((k) => k.replace(/\s+/g, ""));
+      for (const actualKey of Object.keys(course)) {
+        const normalizedActual = actualKey.replace(/\s+/g, "");
+        if (normalizedCandidates.includes(normalizedActual)) {
+          const val = course[actualKey];
+          if (val !== undefined && val !== null && String(val).trim() !== "") {
+            return String(val).trim();
+          }
+        }
+      }
+      return "";
     }
 
     // 개강일 빠른순 정렬
@@ -3837,7 +3877,7 @@
       bindOngoingCardClicks();
     }
 
-    // ★ 진행중인 부트캠프 하단 리스트(개강일 / 과정명 / 교육장소) 렌더링 (스프레드시트 연동 & 개강일순) ★
+    // ★ 진행중인 부트캠프 하단 리스트(개강일 / 부트캠프명 / 교육장소) 렌더링 (스프레드시트 연동 & 개강일순) ★
     function renderOngoingQuickList(sortedCourses) {
       const quickListContainer = document.getElementById("ongoing-quick-list");
       const quickListCount = document.getElementById("ongoing-quick-list-count");
@@ -3857,7 +3897,9 @@
 
       sortedCourses.forEach((course, idx) => {
         const cleanDate = escapeHtml(formatCleanStartDate(course["개강일"] || ""));
-        const subject = escapeHtml(course["과정명"] || course["과목명"] || "");
+        const bootcampName = getCourseField(course, ["부트캠프", "부트캠프명"]);
+        const fallbackTitle = getCourseField(course, ["과정명", "과목명"]);
+        const subject = escapeHtml(bootcampName || fallbackTitle);
         const location = escapeHtml(course["교육장소"] || "");
 
         const row = document.createElement("a");
@@ -3973,7 +4015,7 @@
 
       // 1) 상단 슬라이드 업데이트
       renderOngoingCourses(sortedCourses);
-      // 2) 진행중인 부트캠프 하단 리스트(개강일/과정명/교육장소) 업데이트
+      // 2) 진행중인 부트캠프 하단 리스트(개강일/부트캠프명/교육장소) 업데이트
       renderOngoingQuickList(sortedCourses);
 
       // 3) 하단 상세 카드 업데이트
